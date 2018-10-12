@@ -1,0 +1,62 @@
+package springboot.hello.hellospringboot.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import springboot.hello.hellospringboot.entity.UserEntity;
+import springboot.hello.hellospringboot.response.BaseResp;
+import springboot.hello.hellospringboot.service.UserService;
+
+import java.util.List;
+
+/**
+ * <p>
+ * 用户控制层
+ * </p>
+ *
+ * @author hss
+ * @since 2018-10-09
+ */
+@RestController
+@RequestMapping("/hellospringboot")
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    /**
+     * 查询用户列表
+     *
+     * @return
+     */
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public List<UserEntity> list() {
+        return userService.list();
+    }
+
+
+    /**
+     * 删除用户列表
+     * @return
+     */
+    @RequestMapping(value = "/delete" ,method = RequestMethod.POST)
+    public BaseResp<String> deleteById(@RequestBody Integer id) {
+        userService.delUser(id);
+        return new BaseResp("删除成功");
+    }
+
+
+    /**
+     * 添加用户
+     * @return
+     */
+    @RequestMapping(value = "/save" ,method = RequestMethod.POST)
+    public BaseResp<String> save(@RequestBody UserEntity user) {
+        userService.addUser(user);
+        return new BaseResp("新增成功");
+    }
+
+}
+

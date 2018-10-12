@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springboot.hello.hellospringboot.dao.UserDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="springboot.hello.hellospringboot.entity.UserEntity">
+		<id column="t_id" property="id" />
+		<result column="t_name" property="name" />
+		<result column="t_age" property="age" />
+		<result column="t_address" property="address" />
+	</resultMap>
+
+	<select id="list"  resultMap="BaseResultMap">
+		SELECT * FROM t_users
+	</select>
+
+
+</mapper>
