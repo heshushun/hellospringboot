@@ -14,5 +14,9 @@ import java.util.List;
  * @since 2018-10-09
  */
 public interface UserDao extends BaseMapper<UserEntity> {
+
     public List<UserEntity> list();
+
+    //批量保存
+    public void batchSave(List<UserEntity> userList);
 }

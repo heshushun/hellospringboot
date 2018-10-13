@@ -60,5 +60,14 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
         System.out.println("添加user");
     }
 
-
+    /**
+     * 批量保存用户
+     * @param userList
+     */
+    @Override
+    @CacheEvict(value="users",allEntries=true)
+    public void saveUserList(List<UserEntity> userList){
+        this.baseMapper.batchSave(userList);
+        System.out.println("添加user");
+    }
 }

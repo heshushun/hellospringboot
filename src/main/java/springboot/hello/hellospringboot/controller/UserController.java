@@ -55,5 +55,15 @@ public class UserController {
         return new BaseResp("新增成功");
     }
 
+    /**
+     * 批量添加用户
+     * @return
+     */
+    @RequestMapping(value = "/saveList" ,method = RequestMethod.POST)
+    public BaseResp<String> saveUserList(@RequestBody List<UserEntity> userList) {
+        userService.saveUserList(userList);
+        return new BaseResp("批量添加成功");
+    }
+
 }
 

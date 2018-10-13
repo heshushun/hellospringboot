@@ -23,4 +23,6 @@ public  interface UserService extends IService<UserEntity> {
 
     public void addUser(UserEntity user);
 
+    public void saveUserList(List<UserEntity> userList);
+
 }
