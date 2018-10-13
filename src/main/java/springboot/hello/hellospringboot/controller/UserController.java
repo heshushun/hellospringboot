@@ -1,10 +1,7 @@
 package springboot.hello.hellospringboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import springboot.hello.hellospringboot.entity.UserEntity;
 import springboot.hello.hellospringboot.response.BaseResp;
 import springboot.hello.hellospringboot.service.UserService;
@@ -42,7 +39,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/delete" ,method = RequestMethod.POST)
-    public BaseResp<String> deleteById(@RequestBody Integer id) {
+    public BaseResp<String> deleteById(@RequestParam Integer id) {
         userService.delUser(id);
         return new BaseResp("删除成功");
     }
