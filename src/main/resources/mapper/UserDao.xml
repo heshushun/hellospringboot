@@ -14,5 +14,19 @@
 		SELECT * FROM t_users
 	</select>
 
+	<insert id="batchSave" parameterType="java.util.List">
+		insert into t_users(
+		t_name, t_age, t_address
+		) values
+		<foreach collection="list" item="item" index="index" separator="," open="" close="">
+			(
+			#{item.name,jdbcType=VARCHAR},
+			#{item.age,jdbcType=VARCHAR},
+			#{item.address,jdbcType=VARCHAR}
+			)
+		</foreach>
+	</insert>
+
+
 
 </mapper>
