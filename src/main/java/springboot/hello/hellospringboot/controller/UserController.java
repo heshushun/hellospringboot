@@ -2,14 +2,19 @@ package springboot.hello.hellospringboot.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import springboot.hello.hellospringboot.common.orika.OrikaBeanMapper;
 import springboot.hello.hellospringboot.entity.UserEntity;
 import springboot.hello.hellospringboot.request.Req700001;
+import springboot.hello.hellospringboot.request.Req700002;
+import springboot.hello.hellospringboot.request.Req700003;
+import springboot.hello.hellospringboot.request.Req700004;
 import springboot.hello.hellospringboot.response.BaseResp;
 import springboot.hello.hellospringboot.service.UserService;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.text.ParseException;
 import java.util.List;
 
@@ -47,7 +52,8 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/page", method = RequestMethod.GET)
-    public BaseResp<Page<UserEntity>> page( Req700001 req) throws ParseException {
+    public BaseResp page(@Valid Req700001 req) throws ParseException {
+
         Page<UserEntity> page = new Page<>();
 
         page.setCurrent(req.getCurrent());
@@ -57,7 +63,7 @@ public class UserController {
 
         Page<UserEntity> userPage = userService.selectUserPage(page,orikaBeanMapper.map(req,UserEntity.class));
 
-        return new BaseResp<>(userPage);
+        return new BaseResp(Boolean.TRUE,userPage);
     }
 
     /**
@@ -65,19 +71,18 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/delete" ,method = RequestMethod.POST)
-    public BaseResp<String> deleteById(@RequestParam Integer id) {
-        userService.delUser(id);
+    public BaseResp<String> deleteById(@Valid  Req700002 req) {
+        userService.delUser(req.getId());
         return new BaseResp("删除成功");
     }
-
 
     /**
      * 添加用户
      * @return
      */
     @RequestMapping(value = "/save" ,method = RequestMethod.POST)
-    public BaseResp<String> save(@RequestBody UserEntity user) {
-        userService.addUser(user);
+    public BaseResp<String> save(@RequestBody @Valid Req700003 req) {
+        userService.addUser(orikaBeanMapper.map(req,UserEntity.class));
         return new BaseResp("新增成功");
     }
 
@@ -86,7 +91,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/saveList" ,method = RequestMethod.POST)
-    public BaseResp<String> saveUserList(@RequestBody List<UserEntity> userList) {
+    public BaseResp<String> saveUserList(@RequestBody @Valid List<UserEntity> userList) {
         userService.saveUserList(userList);
         return new BaseResp("批量添加成功");
     }
@@ -96,8 +101,11 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/get" ,method = RequestMethod.POST)
-    public UserEntity getUserById(@RequestParam Integer id) {
-        return userService.getUserById(id);
+    public BaseResp<UserEntity> getUserById(@Valid Req700004 req) {
+
+        UserEntity userEntity = userService.getUserById(req.getId());
+
+        return new BaseResp(Boolean.TRUE,userEntity);
     }
 
 

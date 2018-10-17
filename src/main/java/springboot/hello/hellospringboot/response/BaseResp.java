@@ -1,11 +1,13 @@
 package springboot.hello.hellospringboot.response;
 
+import springboot.hello.hellospringboot.common.exception.ErrorResult;
+
 /**
  * @Author: hss
  * @Date: 2018/10/09
  * @Desc: 基础返回信息
  */
-public class BaseResp<T> {
+public class BaseResp<T> extends ErrorResult {
     private Boolean success=Boolean.TRUE;
     private T data;
 

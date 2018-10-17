@@ -1,26 +1,19 @@
 package springboot.hello.hellospringboot.request;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.plugins.Page;
-
-import springboot.hello.hellospringboot.entity.UserEntity;
-
-
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-/**
- * 用户 分页的 请求
- */
-public class Req700001 extends Page<UserEntity> implements Serializable {
-
+public class Req700003 implements Serializable {
     private static final long serialVersionUID = -7323868806548711092L;
 
-    // @NotBlank(message = "名称不能为空")
+    @NotBlank(message = "名称不能为空")
     private String name;
 
+    @NotNull(message = "年龄不能为空")
     private int age;
 
+    @NotBlank(message = "地址不能为空")
     private String address;
 
     public String getName() {
@@ -49,7 +42,7 @@ public class Req700001 extends Page<UserEntity> implements Serializable {
 
     @Override
     public String toString() {
-        return "Req700001{" +
+        return "Req700003{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
                 ", address='" + address + '\'' +
