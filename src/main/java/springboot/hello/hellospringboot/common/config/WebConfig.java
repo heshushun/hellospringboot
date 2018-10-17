@@ -1,4 +1,4 @@
-package springboot.hello.hellospringboot.config;
+package springboot.hello.hellospringboot.common.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -6,13 +6,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import springboot.hello.hellospringboot.redis.maneger.RedisManager;
-import springboot.hello.hellospringboot.redis.util.RedisConfigUtil;
+import springboot.hello.hellospringboot.common.redis.maneger.RedisManager;
+import springboot.hello.hellospringboot.common.redis.util.RedisConfigUtil;
 
 /**
  * Created by xuqw on 2018/2/24.
  */
-//@Configuration
+// @Configuration
 public class WebConfig {
 
 

@@ -1,4 +1,4 @@
-package springboot.hello.hellospringboot.config;
+package springboot.hello.hellospringboot.common.config;
 
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;

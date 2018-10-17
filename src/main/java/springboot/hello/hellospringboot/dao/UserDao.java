@@ -1,6 +1,7 @@
 package springboot.hello.hellospringboot.dao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import springboot.hello.hellospringboot.entity.UserEntity;
 
 import java.util.List;
@@ -15,8 +16,12 @@ import java.util.List;
  */
 public interface UserDao extends BaseMapper<UserEntity> {
 
+    // 查询列表
     public List<UserEntity> list();
 
-    //批量保存
+    // 批量保存
     public void batchSave(List<UserEntity> userList);
+
+    // 分页 查询列表
+    public List<UserEntity> selectUserList(Pagination page, UserEntity userEntity);
 }

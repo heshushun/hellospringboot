@@ -1,8 +1,7 @@
 package springboot.hello.hellospringboot.service;
 
 import com.baomidou.mybatisplus.service.IService;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
+import com.baomidou.mybatisplus.plugins.Page;
 import springboot.hello.hellospringboot.entity.UserEntity;
 
 import java.util.List;
@@ -24,5 +23,9 @@ public  interface UserService extends IService<UserEntity> {
     public void addUser(UserEntity user);
 
     public void saveUserList(List<UserEntity> userList);
+
+    public UserEntity getUserById(Integer id);
+
+    public Page<UserEntity> selectUserPage(Page<UserEntity> page, UserEntity userEntity);
 
 }

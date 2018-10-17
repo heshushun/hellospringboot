@@ -1,4 +1,4 @@
-package springboot.hello.hellospringboot.config;
+package springboot.hello.hellospringboot.common.config;
 
 import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
 import org.mybatis.spring.annotation.MapperScan;

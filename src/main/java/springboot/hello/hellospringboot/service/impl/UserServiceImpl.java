@@ -5,11 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import com.baomidou.mybatisplus.plugins.Page;
 import org.springframework.stereotype.Service;
 import springboot.hello.hellospringboot.dao.UserDao;
 import springboot.hello.hellospringboot.entity.UserEntity;
-import springboot.hello.hellospringboot.redis.maneger.RedisManager;
-import springboot.hello.hellospringboot.redis.util.RedisConstant;
 import springboot.hello.hellospringboot.service.UserService;
 
 import java.util.List;
@@ -31,7 +30,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
      */
     @Override
     //@Cacheable(value="users", key="#RedisConstant.user_list")
-    @Cacheable(value="users")
+    @Cacheable(value="users" , key="#root.methodName")
     public List<UserEntity> list() {
         return this.baseMapper.list();
     }
@@ -68,6 +67,28 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
     @CacheEvict(value="users",allEntries=true)
     public void saveUserList(List<UserEntity> userList){
         this.baseMapper.batchSave(userList);
-        System.out.println("添加user");
+        System.out.println("批量添加user");
     }
+
+    /**
+     * 根据Id 查询用户
+     * @param id
+     * @return
+     */
+    @Override
+    public UserEntity getUserById(Integer id) {
+        return this.baseMapper.selectById(id);
+    }
+
+    /**
+     * 分页查询用户
+     * @param page, userEntity
+     * @return
+     */
+    @Override
+    @Cacheable(value="users" , key="#root.methodName")
+    public Page<UserEntity> selectUserPage(Page<UserEntity> page, UserEntity userEntity) {
+        return page.setRecords(this.baseMapper.selectUserList(page,userEntity));
+    }
+
 }

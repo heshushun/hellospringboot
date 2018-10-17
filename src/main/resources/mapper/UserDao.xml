@@ -14,6 +14,24 @@
 		SELECT * FROM t_users
 	</select>
 
+
+	<!-- 分页查询 -->
+	<select id="selectUserList"  parameterType="springboot.hello.hellospringboot.entity.UserEntity" resultMap="BaseResultMap">
+		SELECT * FROM t_users
+		<where>
+			<if test="name != null and name != ''">
+				AND  t_name  like CONCAT('%',#{name},'%')
+			</if>
+			<if test="age != null and age != ''">
+				AND  t_age  = #{age}
+			</if>
+			<if test="address != null and address != ''">
+				AND  t_address  = #{address}
+			</if>
+		</where>
+	</select>
+
+
 	<insert id="batchSave" parameterType="java.util.List">
 		insert into t_users(
 		t_name, t_age, t_address

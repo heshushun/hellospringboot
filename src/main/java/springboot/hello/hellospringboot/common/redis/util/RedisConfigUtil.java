@@ -1,4 +1,4 @@
-package springboot.hello.hellospringboot.redis.util;
+package springboot.hello.hellospringboot.common.redis.util;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -12,7 +12,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * Created by xuqw on 2018/4/11.
  */
 public class RedisConfigUtil {
-
     /**
      * redisTemplate 序列化使用的jdkSerializeable, 存储二进制字节码, 所以自定义序列化类
      * @param redisConnectionFactory
