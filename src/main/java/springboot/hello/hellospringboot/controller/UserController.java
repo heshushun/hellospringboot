@@ -2,7 +2,6 @@ package springboot.hello.hellospringboot.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import springboot.hello.hellospringboot.common.orika.OrikaBeanMapper;
 import springboot.hello.hellospringboot.entity.UserEntity;
@@ -13,7 +12,6 @@ import springboot.hello.hellospringboot.request.Req700004;
 import springboot.hello.hellospringboot.response.BaseResp;
 import springboot.hello.hellospringboot.service.UserService;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.util.List;
@@ -102,9 +100,7 @@ public class UserController {
      */
     @RequestMapping(value = "/get" ,method = RequestMethod.POST)
     public BaseResp<UserEntity> getUserById(@Valid Req700004 req) {
-
         UserEntity userEntity = userService.getUserById(req.getId());
-
         return new BaseResp(Boolean.TRUE,userEntity);
     }
 

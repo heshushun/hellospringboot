@@ -29,7 +29,6 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
      * @return
      */
     @Override
-    //@Cacheable(value="users", key="#RedisConstant.user_list")
     @Cacheable(value="users" , key="#root.methodName")
     public List<UserEntity> list() {
         return this.baseMapper.list();

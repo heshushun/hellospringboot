@@ -4,11 +4,10 @@ package springboot.hello.hellospringboot.common.exception;
 import springboot.hello.hellospringboot.common.exception.domain.ErrorInfo;
 
 /**
- * 业务性异常基类
- * Created by xuebojie on 16/5/6.
+ * 系统性异常基类
+ * Created by yzhang on 16/5/6.
  */
-public class BizException extends BaseRuntimeException {
-
+public class SystemException extends BaseRuntimeException {
     /**
      * Constructs a new runtime exception with {@code null} as its
      * detail message.  The cause is not initialized, and may subsequently be
@@ -16,7 +15,7 @@ public class BizException extends BaseRuntimeException {
      *
      * @param error
      */
-    public BizException(ErrorInfo error) {
+    public SystemException(ErrorInfo error) {
         super(error);
     }
 
@@ -25,6 +24,6 @@ public class BizException extends BaseRuntimeException {
      * detail message.  The cause is not initialized, and may subsequently be
      * initialized by a call to {@link #initCause}.
      */
-    public BizException() {
+    public SystemException() {
     }
 }
