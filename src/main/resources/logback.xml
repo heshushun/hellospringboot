@@ -34,4 +34,9 @@
         <appender-ref ref="FILE"/>
     </root>
 
+    <!--避免定时任务 scheduling 启动时 debug级别异常打印-->
+    <logger name="org.springframework.scheduling">
+        <level value="info" />
+    </logger>
+
 </configuration>

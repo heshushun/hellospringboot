@@ -6,6 +6,8 @@ import springboot.hello.hellospringboot.service.StockService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.Stack;
+
 /**
  * <p>
  *  服务实现类
@@ -16,5 +18,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class StockServiceImpl extends ServiceImpl<StockDao, Stock> implements StockService {
-	
+
+    @Override
+    public void addStock(Stock stock) {
+        this.baseMapper.insert(stock);
+    }
+
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springboot.hello.hellospringboot.dao.TaskDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="springboot.hello.hellospringboot.entity.Task">
+		<id column="task_id" property="taskId" />
+		<result column="task_name" property="taskName" />
+		<result column="task_exe_class" property="taskExeClass" />
+		<result column="task_exe_method" property="taskExeMethod" />
+		<result column="task_cron" property="taskCron" />
+		<result column="task_status" property="taskStatus" />
+	</resultMap>
+
+	<select id="getTaskCron" resultType="String" >
+		SELECT task_cron  FROM t_task WHERE task_id=1
+	</select>
+
+
+</mapper>

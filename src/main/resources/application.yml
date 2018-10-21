@@ -115,3 +115,7 @@ system:
 
 logging:
   config: classpath:logback.xml
+
+stock:
+  url: http://hq.sinajs.cn/
+  code: sh601003,sh601001,sh600570,sz000001

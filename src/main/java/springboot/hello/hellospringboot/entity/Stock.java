@@ -3,8 +3,8 @@ package springboot.hello.hellospringboot.entity;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.enums.IdType;
-import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
@@ -25,139 +25,172 @@ public class Stock extends Model<Stock> {
     /**
      * ID
      */
-	@TableId(value="stockId", type= IdType.AUTO)
+	@TableId(value="stock_id", type= IdType.AUTO)
 	private Integer stockId;
     /**
      * 股票代码
      */
+	@TableField("stock_code")
 	private String stockCode;
     /**
      * 股票名称
      */
+	@TableField("stock_name")
 	private String stockName;
     /**
      * 开盘价
      */
-	private BigDecimal openPrice;
+	@TableField("open_price")
+	private Double openPrice;
     /**
      * 昨收价
      */
-	private BigDecimal preClosePrice;
+	@TableField("pre_close_price")
+	private Double preClosePrice;
     /**
      * 当前股价
      */
-	private BigDecimal curPrice;
+	@TableField("cur_price")
+	private Double curPrice;
     /**
      * 今日最高价
      */
-	private BigDecimal highPrice;
+	@TableField("high_price")
+	private Double highPrice;
     /**
      * 今日最低价
      */
-	private BigDecimal lowPrice;
+	@TableField("low_price")
+	private Double lowPrice;
     /**
      * 竞买价
      */
-	private BigDecimal competeBuyPrice;
+	@TableField("compete_buy_price")
+	private Double competeBuyPrice;
     /**
      * 竞卖价
      */
-	private BigDecimal competeSellPrice;
+	@TableField("compete_sell_price")
+	private Double competeSellPrice;
     /**
      * 成交量
      */
+	@TableField("volume")
 	private Integer volume;
     /**
      * 成交额
      */
-	private BigDecimal turnover;
+	@TableField("turnover")
+	private Double turnover;
     /**
      * 买一量
      */
+	@TableField("buy_num1")
 	private Integer buyNum1;
     /**
      * 买一价
      */
-	private BigDecimal buyPrice1;
+	@TableField("buy_price1")
+	private Double buyPrice1;
     /**
      * 买二量
      */
+	@TableField("buy_num2")
 	private Integer buyNum2;
     /**
      * 买二价
      */
-	private BigDecimal buyPrice2;
+	@TableField("buy_price2")
+	private Double buyPrice2;
     /**
      * 买三量
      */
+	@TableField("buy_num3")
 	private Integer buyNum3;
     /**
      * 买三价
      */
-	private BigDecimal buyPrice3;
+	@TableField("buy_price3")
+	private Double buyPrice3;
     /**
      * 买四量
      */
+	@TableField("buy_num4")
 	private Integer buyNum4;
     /**
      * 买四价
      */
-	private BigDecimal buyPrice4;
+	@TableField("buy_price4")
+	private Double buyPrice4;
     /**
      * 买5量
      */
+	@TableField("buy_num5")
 	private Integer buyNum5;
     /**
      * 买5价
      */
-	private BigDecimal buyPrice5;
+	@TableField("buy_price5")
+	private Double buyPrice5;
     /**
      * 卖一量
      */
+	@TableField("sell_num1")
 	private Integer sellNum1;
     /**
      * 卖一价
      */
-	private BigDecimal sellPrice1;
+	@TableField("sell_price1")
+	private Double sellPrice1;
     /**
      * 卖二量
      */
+	@TableField("sell_num2")
 	private Integer sellNum2;
     /**
      * 卖二价
      */
-	private BigDecimal sellPrice2;
+	@TableField("sell_price2")
+	private Double sellPrice2;
     /**
      * 卖三量
      */
+	@TableField("sell_num3")
 	private Integer sellNum3;
     /**
      * 卖三价
      */
-	private BigDecimal sellPrice3;
+	@TableField("sell_price3")
+	private Double sellPrice3;
     /**
      * 卖四量
      */
+	@TableField("sell_num4")
 	private Integer sellNum4;
     /**
      * 卖四价
      */
-	private BigDecimal sellPrice4;
+	@TableField("sell_price4")
+	private Double sellPrice4;
     /**
      * 卖5量
      */
+	@TableField("sell_num5")
 	private Integer sellNum5;
     /**
      * 卖5价
      */
-	private BigDecimal sellPrice5;
+	@TableField("sell_price5")
+	private Double sellPrice5;
     /**
      * 交易日期
      */
+	@TableField("data_date")
 	private String dataDate;
     /**
      * 交易时间
      */
+	@TableField("data_time")
 	private String dataTime;
 
 
@@ -185,59 +218,59 @@ public class Stock extends Model<Stock> {
 		this.stockName = stockName;
 	}
 
-	public BigDecimal getOpenPrice() {
+	public Double getOpenPrice() {
 		return openPrice;
 	}
 
-	public void setOpenPrice(BigDecimal openPrice) {
+	public void setOpenPrice(Double openPrice) {
 		this.openPrice = openPrice;
 	}
 
-	public BigDecimal getPreClosePrice() {
+	public Double getPreClosePrice() {
 		return preClosePrice;
 	}
 
-	public void setPreClosePrice(BigDecimal preClosePrice) {
+	public void setPreClosePrice(Double preClosePrice) {
 		this.preClosePrice = preClosePrice;
 	}
 
-	public BigDecimal getCurPrice() {
+	public Double getCurPrice() {
 		return curPrice;
 	}
 
-	public void setCurPrice(BigDecimal curPrice) {
+	public void setCurPrice(Double curPrice) {
 		this.curPrice = curPrice;
 	}
 
-	public BigDecimal getHighPrice() {
+	public Double getHighPrice() {
 		return highPrice;
 	}
 
-	public void setHighPrice(BigDecimal highPrice) {
+	public void setHighPrice(Double highPrice) {
 		this.highPrice = highPrice;
 	}
 
-	public BigDecimal getLowPrice() {
+	public Double getLowPrice() {
 		return lowPrice;
 	}
 
-	public void setLowPrice(BigDecimal lowPrice) {
+	public void setLowPrice(Double lowPrice) {
 		this.lowPrice = lowPrice;
 	}
 
-	public BigDecimal getCompeteBuyPrice() {
+	public Double getCompeteBuyPrice() {
 		return competeBuyPrice;
 	}
 
-	public void setCompeteBuyPrice(BigDecimal competeBuyPrice) {
+	public void setCompeteBuyPrice(Double competeBuyPrice) {
 		this.competeBuyPrice = competeBuyPrice;
 	}
 
-	public BigDecimal getCompeteSellPrice() {
+	public Double getCompeteSellPrice() {
 		return competeSellPrice;
 	}
 
-	public void setCompeteSellPrice(BigDecimal competeSellPrice) {
+	public void setCompeteSellPrice(Double competeSellPrice) {
 		this.competeSellPrice = competeSellPrice;
 	}
 
@@ -249,11 +282,11 @@ public class Stock extends Model<Stock> {
 		this.volume = volume;
 	}
 
-	public BigDecimal getTurnover() {
+	public Double getTurnover() {
 		return turnover;
 	}
 
-	public void setTurnover(BigDecimal turnover) {
+	public void setTurnover(Double turnover) {
 		this.turnover = turnover;
 	}
 
@@ -265,11 +298,11 @@ public class Stock extends Model<Stock> {
 		this.buyNum1 = buyNum1;
 	}
 
-	public BigDecimal getBuyPrice1() {
+	public Double getBuyPrice1() {
 		return buyPrice1;
 	}
 
-	public void setBuyPrice1(BigDecimal buyPrice1) {
+	public void setBuyPrice1(Double buyPrice1) {
 		this.buyPrice1 = buyPrice1;
 	}
 
@@ -281,11 +314,11 @@ public class Stock extends Model<Stock> {
 		this.buyNum2 = buyNum2;
 	}
 
-	public BigDecimal getBuyPrice2() {
+	public Double getBuyPrice2() {
 		return buyPrice2;
 	}
 
-	public void setBuyPrice2(BigDecimal buyPrice2) {
+	public void setBuyPrice2(Double buyPrice2) {
 		this.buyPrice2 = buyPrice2;
 	}
 
@@ -297,11 +330,11 @@ public class Stock extends Model<Stock> {
 		this.buyNum3 = buyNum3;
 	}
 
-	public BigDecimal getBuyPrice3() {
+	public Double getBuyPrice3() {
 		return buyPrice3;
 	}
 
-	public void setBuyPrice3(BigDecimal buyPrice3) {
+	public void setBuyPrice3(Double buyPrice3) {
 		this.buyPrice3 = buyPrice3;
 	}
 
@@ -313,11 +346,11 @@ public class Stock extends Model<Stock> {
 		this.buyNum4 = buyNum4;
 	}
 
-	public BigDecimal getBuyPrice4() {
+	public Double getBuyPrice4() {
 		return buyPrice4;
 	}
 
-	public void setBuyPrice4(BigDecimal buyPrice4) {
+	public void setBuyPrice4(Double buyPrice4) {
 		this.buyPrice4 = buyPrice4;
 	}
 
@@ -329,11 +362,11 @@ public class Stock extends Model<Stock> {
 		this.buyNum5 = buyNum5;
 	}
 
-	public BigDecimal getBuyPrice5() {
+	public Double getBuyPrice5() {
 		return buyPrice5;
 	}
 
-	public void setBuyPrice5(BigDecimal buyPrice5) {
+	public void setBuyPrice5(Double buyPrice5) {
 		this.buyPrice5 = buyPrice5;
 	}
 
@@ -345,11 +378,11 @@ public class Stock extends Model<Stock> {
 		this.sellNum1 = sellNum1;
 	}
 
-	public BigDecimal getSellPrice1() {
+	public Double getSellPrice1() {
 		return sellPrice1;
 	}
 
-	public void setSellPrice1(BigDecimal sellPrice1) {
+	public void setSellPrice1(Double sellPrice1) {
 		this.sellPrice1 = sellPrice1;
 	}
 
@@ -361,11 +394,11 @@ public class Stock extends Model<Stock> {
 		this.sellNum2 = sellNum2;
 	}
 
-	public BigDecimal getSellPrice2() {
+	public Double getSellPrice2() {
 		return sellPrice2;
 	}
 
-	public void setSellPrice2(BigDecimal sellPrice2) {
+	public void setSellPrice2(Double sellPrice2) {
 		this.sellPrice2 = sellPrice2;
 	}
 
@@ -377,11 +410,11 @@ public class Stock extends Model<Stock> {
 		this.sellNum3 = sellNum3;
 	}
 
-	public BigDecimal getSellPrice3() {
+	public Double getSellPrice3() {
 		return sellPrice3;
 	}
 
-	public void setSellPrice3(BigDecimal sellPrice3) {
+	public void setSellPrice3(Double sellPrice3) {
 		this.sellPrice3 = sellPrice3;
 	}
 
@@ -393,11 +426,11 @@ public class Stock extends Model<Stock> {
 		this.sellNum4 = sellNum4;
 	}
 
-	public BigDecimal getSellPrice4() {
+	public Double getSellPrice4() {
 		return sellPrice4;
 	}
 
-	public void setSellPrice4(BigDecimal sellPrice4) {
+	public void setSellPrice4(Double sellPrice4) {
 		this.sellPrice4 = sellPrice4;
 	}
 
@@ -409,11 +442,11 @@ public class Stock extends Model<Stock> {
 		this.sellNum5 = sellNum5;
 	}
 
-	public BigDecimal getSellPrice5() {
+	public Double getSellPrice5() {
 		return sellPrice5;
 	}
 
-	public void setSellPrice5(BigDecimal sellPrice5) {
+	public void setSellPrice5(Double sellPrice5) {
 		this.sellPrice5 = sellPrice5;
 	}
 
