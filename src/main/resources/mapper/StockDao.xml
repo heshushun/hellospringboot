@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springboot.hello.hellospringboot.dao.StockDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="springboot.hello.hellospringboot.entity.Stock">
+		<id column="stockId" property="stockId" />
+		<result column="stockCode" property="stockCode" />
+		<result column="stockName" property="stockName" />
+		<result column="openPrice" property="openPrice" />
+		<result column="preClosePrice" property="preClosePrice" />
+		<result column="curPrice" property="curPrice" />
+		<result column="highPrice" property="highPrice" />
+		<result column="lowPrice" property="lowPrice" />
+		<result column="competeBuyPrice" property="competeBuyPrice" />
+		<result column="competeSellPrice" property="competeSellPrice" />
+		<result column="volume" property="volume" />
+		<result column="turnover" property="turnover" />
+		<result column="buyNum1" property="buyNum1" />
+		<result column="buyPrice1" property="buyPrice1" />
+		<result column="buyNum2" property="buyNum2" />
+		<result column="buyPrice2" property="buyPrice2" />
+		<result column="buyNum3" property="buyNum3" />
+		<result column="buyPrice3" property="buyPrice3" />
+		<result column="buyNum4" property="buyNum4" />
+		<result column="buyPrice4" property="buyPrice4" />
+		<result column="buyNum5" property="buyNum5" />
+		<result column="buyPrice5" property="buyPrice5" />
+		<result column="sellNum1" property="sellNum1" />
+		<result column="sellPrice1" property="sellPrice1" />
+		<result column="sellNum2" property="sellNum2" />
+		<result column="sellPrice2" property="sellPrice2" />
+		<result column="sellNum3" property="sellNum3" />
+		<result column="sellPrice3" property="sellPrice3" />
+		<result column="sellNum4" property="sellNum4" />
+		<result column="sellPrice4" property="sellPrice4" />
+		<result column="sellNum5" property="sellNum5" />
+		<result column="sellPrice5" property="sellPrice5" />
+		<result column="dataDate" property="dataDate" />
+		<result column="dataTime" property="dataTime" />
+	</resultMap>
+
+</mapper>
