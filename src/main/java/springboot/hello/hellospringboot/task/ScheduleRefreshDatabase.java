@@ -8,6 +8,7 @@ import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -40,9 +41,9 @@ public class ScheduleRefreshDatabase {
     private Scheduler scheduler;
 
     // 每隔60s查库，并根据查询结果决定是否重新设置定时任务
-    @Scheduled(fixedRate = 1000 * 60000)
-    //@Scheduled(cron = "0 */1 *  * * * ")
-    public void scheduleUpdateCronTrigger() throws SchedulerException {
+    //@Scheduled(fixedRate = 1000 * 60000)
+    @Scheduled(cron = "0 */1 *  * * *")
+    protected void scheduleUpdateCronTrigger() throws SchedulerException {
         CronTrigger trigger = (CronTrigger) scheduler.getTrigger(cronTrigger.getKey());
         String currentCron = trigger.getCronExpression();// 当前Trigger使用的
         String searchCron = taskService.getTaskCron(); // 从数据库查询出来的

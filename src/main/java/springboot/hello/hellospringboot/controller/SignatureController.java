@@ -1,11 +1,10 @@
 package springboot.hello.hellospringboot.controller;
 
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,15 +34,11 @@ public class SignatureController {
      * 获取签名
      * @param request
      * @param response
-     * HttpServletRequest request,Req800001 req, HttpServletResponse response
      * @return
      */
     @RequestMapping(value = "/getSign", method = org.springframework.web.bind.annotation.RequestMethod.POST)
     public BaseResp valideSignature(HttpServletRequest request, HttpServletResponse response) {
         try {
-            /*if (req == null){
-                return new BaseResp(Boolean.FALSE, "没有参数");
-            }*/
             Map<String, Object> signMap = new HashMap();
 
             /*String[] fields = { "user_id", "login_account", "login_ticket", "client_uuid", "version", "client" ,
@@ -55,19 +50,25 @@ public class SignatureController {
             };*/
 
             Enumeration<String> parameterNames = request.getParameterNames();
-            logger.info(">>>>>>>>>>>>>>>>>入参参数列表：" + parameterNames);
+
+            if (!parameterNames.hasMoreElements()){
+                return new BaseResp(Boolean.FALSE, "没有参数");
+            }
+
+            ArrayList<String> parameterNamelist = new ArrayList<>();//参数名列表
 
             for(Enumeration e=parameterNames;e.hasMoreElements();){
                 String thisName=e.nextElement().toString();
                 String thisValue=request.getParameter(thisName);
                 logger.info(">>>>>>>>>>>>>>参数：" + thisName +">>>>>>>>>>>>>>值："+thisValue);
-                if(!thisValue.equals("")||thisValue == null){
+                if(StringUtils.isNotEmpty(thisValue)){
                     signMap.put(thisName, thisValue);
+                    parameterNamelist.add(thisName);
                 }else{
                     return new BaseResp(Boolean.FALSE,thisName+" 不能为空");
                 }
             }
-
+            logger.info(">>>>>>>>>>>>>>>>>入参key列表：" + parameterNamelist);
             String mySignature = SignKeyGenerator.getSign(signMap, shakey);
 
             return new BaseResp(Boolean.TRUE, "mySignature: "+mySignature);
