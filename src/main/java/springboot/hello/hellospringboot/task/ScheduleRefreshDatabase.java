@@ -40,12 +40,12 @@ public class ScheduleRefreshDatabase {
     private Scheduler scheduler;
 
     // 每隔60s查库，并根据查询结果决定是否重新设置定时任务
-    @Scheduled(fixedRate = 1000 * 60)
+    @Scheduled(fixedRate = 1000 * 60000)
     //@Scheduled(cron = "0 */1 *  * * * ")
     public void scheduleUpdateCronTrigger() throws SchedulerException {
         CronTrigger trigger = (CronTrigger) scheduler.getTrigger(cronTrigger.getKey());
         String currentCron = trigger.getCronExpression();// 当前Trigger使用的
-        String searchCron = taskService.getTaskCron();// 从数据库查询出来的
+        String searchCron = taskService.getTaskCron(); // 从数据库查询出来的
         System.out.println("之前执行时间："+ currentCron);
         System.out.println("查询执行时间："+ searchCron);
         if (currentCron.equals(searchCron)) {
@@ -55,8 +55,7 @@ public class ScheduleRefreshDatabase {
             CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(searchCron);
             // 按新的cronExpression表达式重新构建trigger
             trigger = (CronTrigger) scheduler.getTrigger(cronTrigger.getKey());
-            trigger = trigger.getTriggerBuilder().withIdentity(cronTrigger.getKey())
-                    .withSchedule(scheduleBuilder).build();
+            trigger = trigger.getTriggerBuilder().withIdentity(cronTrigger.getKey()).withSchedule(scheduleBuilder).build();
             // 按新的trigger重新设置job执行
             scheduler.rescheduleJob(cronTrigger.getKey(), trigger);
             currentCron = searchCron;

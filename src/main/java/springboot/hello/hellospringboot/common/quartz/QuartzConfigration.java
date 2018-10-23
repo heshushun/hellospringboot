@@ -34,13 +34,11 @@ public class QuartzConfigration {
      *  如果此处为true，则下一个任务会执行，如果此处为false，则下一个任务会等待上一个任务执行完后，再开始执行
      */
         jobDetail.setConcurrent(false);
-
         jobDetail.setName("getHQ");      // 设置任务的名字
         jobDetail.setGroup("srd");       // 设置任务的分组，这些属性都可以存储在数据库中，在多任务的时候使用
 
         //为需要执行的实体类对应的对象
         jobDetail.setTargetObject(task);
-
         /*
      * saveStock为需要执行的方法
      * 通过这几个配置，告诉JobDetailFactoryBean我们需要执行定时执行ScheduleTask类中的saveStock方法

@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.lang.reflect.Method;
 
@@ -24,14 +25,22 @@ import java.lang.reflect.Method;
 public class RedisConfiguration extends CachingConfigurerSupport {
     /**
      * 采用RedisCacheManager作为缓存管理器
-     * @param connectionFactory
      * @return
      */
-    @Bean
+    //springboot2.0 使用
+    /*@Bean
     public CacheManager cacheManager(RedisConnectionFactory connectionFactory) {
         return RedisCacheManager.create(connectionFactory);
-    }
+    }*/
 
+    //springboot1.0 使用
+    @Bean
+    public CacheManager cacheManager(@SuppressWarnings("rawtypes") RedisTemplate redisTemplate) {
+        RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
+        //设置缓存过期时间
+        // cacheManager.setDefaultExpiration(10000);
+        return cacheManager;
+    }
 
     /**
      * 自定义生成key的规则

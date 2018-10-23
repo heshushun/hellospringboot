@@ -1,12 +1,10 @@
 package springboot.hello.hellospringboot.request;
 
-import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.plugins.Page;
 
 import springboot.hello.hellospringboot.entity.UserEntity;
 
 
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**

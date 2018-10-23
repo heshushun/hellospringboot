@@ -5,7 +5,10 @@ import javafx.application.Application;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+
+import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
@@ -15,10 +18,15 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @SpringBootApplication
 @EnableScheduling
-public class HellospringbootApplication extends SpringBootServletInitializer {
+public class HellospringbootApplication extends SpringBootServletInitializer implements EmbeddedServletContainerCustomizer {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HellospringbootApplication.class, args);
+		SpringApplication.run(HellospringbootApplication.class,args);
+	}
+
+	@Override
+	public void customize(ConfigurableEmbeddedServletContainer configurableEmbeddedServletContainer) {
+
 	}
 
 	/**
@@ -28,6 +36,8 @@ public class HellospringbootApplication extends SpringBootServletInitializer {
 	 */
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(Application.class);
+		return application.sources(HellospringbootApplication.class);
 	}
+
+
 }

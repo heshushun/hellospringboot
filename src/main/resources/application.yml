@@ -1,6 +1,6 @@
 server:
   address: localhost
-  port: 8080
+  port: 7002
 spring:
   application:
     name: hellospringboot
@@ -119,3 +119,6 @@ logging:
 stock:
   url: http://hq.sinajs.cn/
   code: sh601003,sh601001,sh600570,sz000001
+
+### 防篡改加签-签名密钥
+shakey: LUTqZb3IkHjKcH3xjQcpqfZvWvNjQ4760KjZb3VBXmJ4Y9zwK5egrkIQK05DaCiq4vlxqAEvUzDTsl8vwlYNWJpozHxRjbSXr6gBcMxPtRbtPcLRkgwhgvD/3k054XnKFlmbQW5y716VSFkjLQnjY91c+HoAO4IiWpsYOUD+ZX4=

@@ -1,6 +1,8 @@
 package springboot.hello.hellospringboot.request;
 
-import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
