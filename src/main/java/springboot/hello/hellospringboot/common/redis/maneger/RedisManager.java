@@ -8,7 +8,7 @@ import org.springframework.data.redis.core.ValueOperations;
 import java.util.List;
 
 /**
- * Created by xuqw on 2018/3/26.
+ * Created by hss on 2018/10/26.
  */
 public class RedisManager {
 

@@ -1,4 +1,4 @@
-package springboot.hello.hellospringboot.task;
+package springboot.hello.hellospringboot.task.ScheduleTaskController;
 
 import javax.annotation.Resource;
 
@@ -17,7 +17,8 @@ import springboot.hello.hellospringboot.service.TaskService;
 
 /**
  * <p>
- *  定时查库，并更新任务
+ *  单个定时任务 控制类。
+ *  定时查库，并更新任务。
  * </p>
  *
  * @author hss
@@ -42,8 +43,10 @@ public class ScheduleRefreshDatabase {
 
     // 每隔60s查库，并根据查询结果决定是否重新设置定时任务
     //@Scheduled(fixedRate = 1000 * 60000)
-    @Scheduled(cron = "0 */1 *  * * *")
+    //@Scheduled(cron = "0/5 * * * * *")
     protected void scheduleUpdateCronTrigger() throws SchedulerException {
+        //获取触发器trigger
+        System.out.println("-----=======》 cronTrigger-Key："+ cronTrigger.getKey());
         CronTrigger trigger = (CronTrigger) scheduler.getTrigger(cronTrigger.getKey());
         String currentCron = trigger.getCronExpression();// 当前Trigger使用的
         String searchCron = taskService.getTaskCron(); // 从数据库查询出来的
@@ -56,7 +59,12 @@ public class ScheduleRefreshDatabase {
             CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(searchCron);
             // 按新的cronExpression表达式重新构建trigger
             trigger = (CronTrigger) scheduler.getTrigger(cronTrigger.getKey());
-            trigger = trigger.getTriggerBuilder().withIdentity(cronTrigger.getKey()).withSchedule(scheduleBuilder).build();
+            trigger = trigger
+                    .getTriggerBuilder()
+                    .withIdentity(cronTrigger.getKey())
+                    .withSchedule(scheduleBuilder)
+                    .build();
+
             // 按新的trigger重新设置job执行
             scheduler.rescheduleJob(cronTrigger.getKey(), trigger);
             currentCron = searchCron;

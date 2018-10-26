@@ -1,4 +1,4 @@
-package springboot.hello.hellospringboot.task;
+package springboot.hello.hellospringboot.task.ScheduleTask;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import springboot.hello.hellospringboot.common.utils.HttpUtil;
 import springboot.hello.hellospringboot.entity.Stock;
@@ -14,7 +13,7 @@ import springboot.hello.hellospringboot.service.StockService;
 
 /**
  * <p>
- *  任务类
+ *  单个定时任务  任务类
  * </p>
  *
  * @author hss

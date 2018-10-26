@@ -17,4 +17,8 @@
 	</select>
 
 
+	<select id="getOpenTaskList" resultType="springboot.hello.hellospringboot.entity.Task" >
+		SELECT *  FROM t_task WHERE task_status = 1
+	</select>
+
 </mapper>

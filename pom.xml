@@ -6,7 +6,7 @@
 	<groupId>springboot.hello</groupId>
 	<artifactId>hellospringboot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>hellospringboot</name>
 	<description>Demo project for Spring Boot</description>
