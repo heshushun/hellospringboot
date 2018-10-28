@@ -17,5 +17,7 @@ import java.util.Stack;
 public interface StockService extends IService<Stock> {
 
     public void addStock(Stock stock);
+
+    public void cleanStock();
 	
 }

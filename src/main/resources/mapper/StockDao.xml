@@ -40,4 +40,8 @@
 		<result column="data_time" property="dataTime" />
 	</resultMap>
 
+	<delete id="cleanStock"  >
+		delete from t_stock
+	</delete>
+
 </mapper>

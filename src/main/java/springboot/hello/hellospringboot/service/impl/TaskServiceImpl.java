@@ -32,4 +32,13 @@ public class TaskServiceImpl extends ServiceImpl<TaskDao, Task> implements TaskS
     public List<Task> getOpenTaskList() {
         return this.baseMapper.getOpenTaskList();
     }
+
+    /**
+     * 根据 任务ID获取任务
+     * @return
+     */
+    @Override
+    public Task getTaskById(Integer taskId) {
+        return this.baseMapper.selectById(taskId);
+    }
 }

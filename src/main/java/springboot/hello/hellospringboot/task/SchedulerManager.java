@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -19,7 +20,8 @@ import java.util.Date;
  * @since 2018-10-26
  */
 @Component
-@RequestMapping("/quartz")
+//@RestController
+//@RequestMapping("/quartz")
 public class SchedulerManager {
 
     @Resource(name = "multitaskScheduler")
@@ -41,14 +43,14 @@ public class SchedulerManager {
     /**
      * 获取Job信息
      *
-     * @param name
-     * @param group
+     * @param trigger_name
+     * @param trigger_group
      * @return
      * @throws SchedulerException
      */
-    @RequestMapping(value = "/task/getJobInfo", method = RequestMethod.POST)
-    public String getJobInfo(String name, String group) throws SchedulerException {
-        TriggerKey triggerKey = new TriggerKey(name, group);
+    //@RequestMapping(value = "/task/getJobInfo", method = RequestMethod.POST)
+    public String getJobInfo(String trigger_name, String trigger_group) throws SchedulerException {
+        TriggerKey triggerKey = new TriggerKey(trigger_name, trigger_group);
         CronTrigger cronTrigger = (CronTrigger) scheduler.getTrigger(triggerKey);
         return String.format("time:%s,state:%s", cronTrigger.getCronExpression(),
                 scheduler.getTriggerState(triggerKey).name());
@@ -58,13 +60,14 @@ public class SchedulerManager {
     /**
      * 获取Job任务状态
      *
-     * @param name
-     * @param group
+     * @param trigger_name
+     * @param trigger_group
      * @return
      * @throws SchedulerException
      */
-    public String getJobStatus(String name, String group) throws SchedulerException {
-        TriggerKey triggerKey = new TriggerKey(name, group);
+    //@RequestMapping(value = "/task/getJobStatus", method = RequestMethod.POST)
+    public String getJobStatus(String trigger_name, String trigger_group) throws SchedulerException {
+        TriggerKey triggerKey = new TriggerKey(trigger_name, trigger_group);
         return scheduler.getTriggerState(triggerKey).name();
     }
 
@@ -72,20 +75,20 @@ public class SchedulerManager {
     /**
      * 修改某个任务的执行时间
      *
-     * @param name
-     * @param group
+     * @param trigger_name
+     * @param trigger_group
      * @param time
      * @return
      * @throws SchedulerException
      */
-    public boolean modifyJob(String name, String group, String time) throws SchedulerException {
+    public boolean modifyJob(String trigger_name, String trigger_group, String time) throws SchedulerException {
         Date date = null;
-        TriggerKey triggerKey = new TriggerKey(name, group);
+        TriggerKey triggerKey = new TriggerKey(trigger_name, trigger_group);
         CronTrigger cronTrigger = (CronTrigger) scheduler.getTrigger(triggerKey);
         String oldTime = cronTrigger.getCronExpression();
         if (!oldTime.equalsIgnoreCase(time)) {
             CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(time);
-            CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(name, group)
+            CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(trigger_name, trigger_group)
                     .withSchedule(cronScheduleBuilder).build();
             date = scheduler.rescheduleJob(triggerKey, trigger);
         }
@@ -98,6 +101,7 @@ public class SchedulerManager {
      *
      * @throws SchedulerException
      */
+    //@RequestMapping(value = "/task/pauseAllJob", method = RequestMethod.GET)
     public void pauseAllJob() throws SchedulerException {
         scheduler.pauseAll();
     }
@@ -106,12 +110,13 @@ public class SchedulerManager {
     /**
      * 暂停某个任务
      *
-     * @param name
-     * @param group
+     * @param job_name
+     * @param job_group
      * @throws SchedulerException
      */
-    public void pauseJob(String name, String group) throws SchedulerException {
-        JobKey jobKey = new JobKey(name, group);
+    //@RequestMapping(value = "/task/pauseJob", method = RequestMethod.POST)
+    public void pauseJob(String job_name, String job_group) throws SchedulerException {
+        JobKey jobKey = new JobKey(job_name, job_group);
         JobDetail jobDetail = scheduler.getJobDetail(jobKey);
         if (jobDetail == null)
             return;
@@ -124,6 +129,7 @@ public class SchedulerManager {
      *
      * @throws SchedulerException
      */
+    //@RequestMapping(value = "/task/resumeAllJob", method = RequestMethod.GET)
     public void resumeAllJob() throws SchedulerException {
         scheduler.resumeAll();
     }
@@ -132,12 +138,13 @@ public class SchedulerManager {
     /**
      * 恢复某个任务
      *
-     * @param name
-     * @param group
+     * @param job_name
+     * @param job_group
      * @throws SchedulerException
      */
-    public void resumeJob(String name, String group) throws SchedulerException {
-        JobKey jobKey = new JobKey(name, group);
+    //@RequestMapping(value = "/task/resumeJob", method = RequestMethod.POST)
+    public void resumeJob(String job_name, String job_group) throws SchedulerException {
+        JobKey jobKey = new JobKey(job_name, job_group);
         JobDetail jobDetail = scheduler.getJobDetail(jobKey);
         if (jobDetail == null)
             return;
@@ -148,12 +155,13 @@ public class SchedulerManager {
     /**
      * 删除某个任务
      *
-     * @param name
-     * @param group
+     * @param job_name
+     * @param job_group
      * @throws SchedulerException
      */
-    public void deleteJob(String name, String group) throws SchedulerException {
-        JobKey jobKey = new JobKey(name, group);
+    //@RequestMapping(value = "/task/deleteJob", method = RequestMethod.POST)
+    public void deleteJob(String job_name, String job_group) throws SchedulerException {
+        JobKey jobKey = new JobKey(job_name, job_group);
         JobDetail jobDetail = scheduler.getJobDetail(jobKey);
         if (jobDetail == null)
             return;

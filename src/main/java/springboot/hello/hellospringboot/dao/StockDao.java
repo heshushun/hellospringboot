@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface StockDao extends BaseMapper<Stock> {
 
+    public void cleanStock();
+
 }

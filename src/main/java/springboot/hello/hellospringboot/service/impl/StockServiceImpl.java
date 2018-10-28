@@ -24,4 +24,9 @@ public class StockServiceImpl extends ServiceImpl<StockDao, Stock> implements St
         this.baseMapper.insert(stock);
     }
 
+    @Override
+    public void cleanStock() {
+        this.baseMapper.cleanStock();
+    }
+
 }

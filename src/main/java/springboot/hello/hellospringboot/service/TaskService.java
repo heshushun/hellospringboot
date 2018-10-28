@@ -23,4 +23,10 @@ public interface TaskService extends IService<Task> {
      */
     public List<Task> getOpenTaskList ();
 
+    /**
+     * 根据 任务ID获取任务
+     * @return
+     */
+    public Task getTaskById (Integer taskId);
+
 }
