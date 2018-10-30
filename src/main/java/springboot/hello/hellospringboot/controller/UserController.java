@@ -5,15 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springboot.hello.hellospringboot.common.orika.OrikaBeanMapper;
 import springboot.hello.hellospringboot.entity.UserEntity;
-import springboot.hello.hellospringboot.request.Req700001;
-import springboot.hello.hellospringboot.request.Req700002;
-import springboot.hello.hellospringboot.request.Req700003;
-import springboot.hello.hellospringboot.request.Req700004;
+import springboot.hello.hellospringboot.request.*;
 import springboot.hello.hellospringboot.response.BaseResp;
 import springboot.hello.hellospringboot.service.UserService;
 
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -25,7 +25,7 @@ import java.util.List;
  * @since 2018-10-09
  */
 @RestController
-@RequestMapping("/hellospringboot")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -33,6 +33,20 @@ public class UserController {
 
     @Autowired
     private OrikaBeanMapper orikaBeanMapper;
+
+    /**
+     * 用户登录接口
+     * @param res 登录请求参数
+     * @return
+     */
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public BaseResp login(@Valid Req700005 res){
+        String loginToken = userService.login(res);
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("msg","登录成功！");
+        result.put("Token",loginToken);
+        return new BaseResp<>(Boolean.TRUE,result);
+    }
 
     /**
      * 查询用户列表
@@ -80,9 +94,18 @@ public class UserController {
      */
     @RequestMapping(value = "/save" ,method = RequestMethod.POST)
     public BaseResp<String> save(@RequestBody @Valid Req700003 req) {
-        userService.addUser(orikaBeanMapper.map(req,UserEntity.class));
+        try {
+            userService.addUser(orikaBeanMapper.map(req,UserEntity.class));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return new BaseResp("新增失败");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return new BaseResp("新增失败");
+        }
         return new BaseResp("新增成功");
     }
+
 
     /**
      * 批量添加用户
@@ -93,6 +116,7 @@ public class UserController {
         userService.saveUserList(userList);
         return new BaseResp("批量添加成功");
     }
+
 
     /**
      * 根据Id 查询用户

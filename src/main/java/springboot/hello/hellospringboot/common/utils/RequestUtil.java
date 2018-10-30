@@ -4,7 +4,11 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
-
+/**
+ * @Author: hss
+ * @Date: 2018/10/30
+ * @Desc: HTTP请求 工具
+ */
 public class RequestUtil {
     /**
      * request 请求头中的accept

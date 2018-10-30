@@ -41,14 +41,6 @@ public class SignatureController {
         try {
             Map<String, Object> signMap = new HashMap();
 
-            /*String[] fields = { "user_id", "login_account", "login_ticket", "client_uuid", "version", "client" ,
-                    "product_id", "client_token", "user_code", "goods_id", "entrust_price", "used_price_flag" ,
-                    "timestamp", "zl_user_id", "user_name_text", "cert_type", "cert_id", "purchase_type" ,
-                    "bank_code", "card_no", "pay_password", "fund_user_id", "order_no", "pay_way" ,
-                    "service_type", "goods_type", "nonceStr", "grant_type", "present_unit", "order_type" ,
-                    "pay_status"
-            };*/
-
             Enumeration<String> parameterNames = request.getParameterNames();
 
             if (!parameterNames.hasMoreElements()){

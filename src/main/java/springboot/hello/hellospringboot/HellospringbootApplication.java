@@ -2,6 +2,8 @@ package springboot.hello.hellospringboot;
 
 
 import javafx.application.Application;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -20,8 +22,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class HellospringbootApplication extends SpringBootServletInitializer implements EmbeddedServletContainerCustomizer {
 
+	private final static Logger logger = LoggerFactory.getLogger(HellospringbootApplication.class);
+
 	public static void main(String[] args) {
 		SpringApplication.run(HellospringbootApplication.class,args);
+		logger.info("HellospringbootApplication is success!");
 	}
 
 	@Override

@@ -20,8 +20,6 @@ import java.util.Date;
  * @since 2018-10-26
  */
 @Component
-//@RestController
-//@RequestMapping("/quartz")
 public class SchedulerManager {
 
     @Resource(name = "multitaskScheduler")
@@ -48,7 +46,6 @@ public class SchedulerManager {
      * @return
      * @throws SchedulerException
      */
-    //@RequestMapping(value = "/task/getJobInfo", method = RequestMethod.POST)
     public String getJobInfo(String trigger_name, String trigger_group) throws SchedulerException {
         TriggerKey triggerKey = new TriggerKey(trigger_name, trigger_group);
         CronTrigger cronTrigger = (CronTrigger) scheduler.getTrigger(triggerKey);
@@ -65,7 +62,6 @@ public class SchedulerManager {
      * @return
      * @throws SchedulerException
      */
-    //@RequestMapping(value = "/task/getJobStatus", method = RequestMethod.POST)
     public String getJobStatus(String trigger_name, String trigger_group) throws SchedulerException {
         TriggerKey triggerKey = new TriggerKey(trigger_name, trigger_group);
         return scheduler.getTriggerState(triggerKey).name();
@@ -101,7 +97,6 @@ public class SchedulerManager {
      *
      * @throws SchedulerException
      */
-    //@RequestMapping(value = "/task/pauseAllJob", method = RequestMethod.GET)
     public void pauseAllJob() throws SchedulerException {
         scheduler.pauseAll();
     }
@@ -114,7 +109,6 @@ public class SchedulerManager {
      * @param job_group
      * @throws SchedulerException
      */
-    //@RequestMapping(value = "/task/pauseJob", method = RequestMethod.POST)
     public void pauseJob(String job_name, String job_group) throws SchedulerException {
         JobKey jobKey = new JobKey(job_name, job_group);
         JobDetail jobDetail = scheduler.getJobDetail(jobKey);
@@ -129,7 +123,6 @@ public class SchedulerManager {
      *
      * @throws SchedulerException
      */
-    //@RequestMapping(value = "/task/resumeAllJob", method = RequestMethod.GET)
     public void resumeAllJob() throws SchedulerException {
         scheduler.resumeAll();
     }
@@ -142,7 +135,6 @@ public class SchedulerManager {
      * @param job_group
      * @throws SchedulerException
      */
-    //@RequestMapping(value = "/task/resumeJob", method = RequestMethod.POST)
     public void resumeJob(String job_name, String job_group) throws SchedulerException {
         JobKey jobKey = new JobKey(job_name, job_group);
         JobDetail jobDetail = scheduler.getJobDetail(jobKey);
@@ -159,7 +151,6 @@ public class SchedulerManager {
      * @param job_group
      * @throws SchedulerException
      */
-    //@RequestMapping(value = "/task/deleteJob", method = RequestMethod.POST)
     public void deleteJob(String job_name, String job_group) throws SchedulerException {
         JobKey jobKey = new JobKey(job_name, job_group);
         JobDetail jobDetail = scheduler.getJobDetail(jobKey);

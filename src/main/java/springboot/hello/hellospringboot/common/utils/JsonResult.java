@@ -1,7 +1,9 @@
 package springboot.hello.hellospringboot.common.utils;
 
 /**
- * Created by yzhang on 2017/2/20.
+ * @Author: hss
+ * @Date: 2018/10/30
+ * @Desc: json格式 响应结果
  */
 public class JsonResult {
     /**

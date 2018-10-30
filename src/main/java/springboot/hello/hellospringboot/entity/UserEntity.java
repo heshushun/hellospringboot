@@ -21,6 +21,12 @@ public class UserEntity implements Serializable
     @TableId(value="t_id", type= IdType.AUTO)
     private Integer id;
 
+    @TableField("t_account")
+    private String account;
+
+    @TableField("t_password")
+    private String password;
+
     @TableField("t_name")
     private String name;
 
@@ -30,7 +36,32 @@ public class UserEntity implements Serializable
     @TableField("t_address")
     private String address;
 
+    @TableField("t_salt")
+    private String salt;
+
+    @TableField("t_maxError")
+    private Integer maxError;
+
+    @TableField("t_status")
+    private Integer status;
+
     public UserEntity() {
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Integer getId() {
@@ -63,5 +94,29 @@ public class UserEntity implements Serializable
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public Integer getMaxError() {
+        return maxError;
+    }
+
+    public void setMaxError(Integer maxError) {
+        this.maxError = maxError;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

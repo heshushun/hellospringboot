@@ -1,17 +1,27 @@
 package springboot.hello.hellospringboot.service.impl;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import com.baomidou.mybatisplus.plugins.Page;
 import org.springframework.stereotype.Service;
+import springboot.hello.hellospringboot.common.exception.BizException;
+import springboot.hello.hellospringboot.common.exception.builder.ErrorBuilder;
+import springboot.hello.hellospringboot.common.helper.JwtHelper;
+import springboot.hello.hellospringboot.common.utils.MD5Hash;
 import springboot.hello.hellospringboot.dao.UserDao;
 import springboot.hello.hellospringboot.entity.UserEntity;
+import springboot.hello.hellospringboot.request.Req700005;
 import springboot.hello.hellospringboot.service.UserService;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -23,6 +33,60 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements UserService {
+
+    @Autowired
+    private UserDao userDao;
+
+    /**
+     * 用户登录
+     * @param res
+     * @return
+     */
+    @Override
+    public String login(Req700005 res) {
+        //先从数据库获取用户
+        UserEntity user = new UserEntity();
+        user.setAccount(res.getAccount());
+        UserEntity user1 = userDao.selectByAccount(user);
+
+        //1、 先看用户是否可用
+        Integer status = user1.getStatus();
+        if (status == 0) {
+            throw new BizException(ErrorBuilder.buildBizError("400", "账户已被冻结,请联系管理员处理！"));
+        }
+        //2、判断该用户是否存在
+        if (user1 == null) {
+            throw new BizException(ErrorBuilder.buildBizError("400", "账户密码错误"));
+        }
+        //3、验证密码是否正确
+        try {
+            if (StringUtils.isBlank(user1.getPassword()) || !MD5Hash.compare(user1.getPassword(), res.getPassword())) {
+                Integer maxError = user1.getMaxError();
+                maxError--;
+                if (maxError > 0) {
+                    user1.setMaxError(maxError);
+                } else {
+                    user1.setMaxError(maxError);
+                    user1.setStatus(0);//冻结用户
+                }
+                userDao.updateById(user1);
+                throw new BizException(ErrorBuilder.buildBizError("400", "账号密码错误,还剩" + maxError + "次机会"));
+            }
+        } catch (Exception e) {
+            throw new BizException(ErrorBuilder.buildBizError(e.getMessage()));
+        }
+        user1.setMaxError(3);//验证密码成功 恢复默认3次
+        userDao.updateById(user1);
+
+        //4、生成token
+        Map<String, String> map = new HashMap<>();
+        map.put("id", user1.getId().toString());
+        map.put("account", user1.getAccount());
+        String jwt = JwtHelper.createJWT(JwtHelper.TIME_OUT, JwtHelper.SECRET, map);//生成token
+        return jwt;
+    }
+
+
 
     /**
      * 获取用户列表
@@ -53,7 +117,12 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
      */
     @Override
     @CacheEvict(value="users",allEntries=true)
-    public void addUser(UserEntity user) {
+    public void addUser(UserEntity user) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        String password =  user.getPassword();
+        //String salt = user.getSalt();
+        MD5Hash hash = new MD5Hash(password,"hellospringboot",2);
+        user.setPassword(hash.toString());
+        user.setSalt("hellospringboot");
         this.baseMapper.insert(user);
         System.out.println("添加user");
     }

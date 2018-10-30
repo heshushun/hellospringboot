@@ -24,4 +24,7 @@ public interface UserDao extends BaseMapper<UserEntity> {
 
     // 分页 查询列表
     public List<UserEntity> selectUserList(Pagination page, UserEntity userEntity);
+
+    // 分页 查询列表
+    public UserEntity selectByAccount(UserEntity user);
 }

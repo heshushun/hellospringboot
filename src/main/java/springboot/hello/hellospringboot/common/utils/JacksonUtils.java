@@ -13,7 +13,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-
+/**
+ * @Author: hss
+ * @Date: 2018/10/30
+ * @Desc: json格式 与 其他格式转换
+ */
 public abstract class JacksonUtils {
 
     private static ObjectMapper objectMapper = new ObjectMapper();

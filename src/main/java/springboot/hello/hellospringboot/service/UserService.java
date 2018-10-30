@@ -3,7 +3,10 @@ package springboot.hello.hellospringboot.service;
 import com.baomidou.mybatisplus.service.IService;
 import com.baomidou.mybatisplus.plugins.Page;
 import springboot.hello.hellospringboot.entity.UserEntity;
+import springboot.hello.hellospringboot.request.Req700005;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -16,11 +19,13 @@ import java.util.List;
  */
 public  interface UserService extends IService<UserEntity> {
 
+    public String login(Req700005 res);
+
     public List<UserEntity> list();
 
     public void delUser(Integer id);
 
-    public void addUser(UserEntity user);
+    public void addUser(UserEntity user) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
     public void saveUserList(List<UserEntity> userList);
 

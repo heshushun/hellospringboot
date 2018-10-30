@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <p>
- *  获取MD5加签 签名
+ *  获取MD5加签 签名mySignature
  * </p>
  *
  * @author hss

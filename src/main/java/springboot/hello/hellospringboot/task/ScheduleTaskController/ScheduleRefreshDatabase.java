@@ -42,7 +42,7 @@ public class ScheduleRefreshDatabase {
     private Scheduler scheduler;
 
     // 每隔60s查库，并根据查询结果决定是否重新设置定时任务
-    //@Scheduled(fixedRate = 1000 * 60000)
+    @Scheduled(fixedRate = 1000 * 60000)
     //@Scheduled(cron = "0/5 * * * * *")
     protected void scheduleUpdateCronTrigger() throws SchedulerException {
         //获取触发器trigger
