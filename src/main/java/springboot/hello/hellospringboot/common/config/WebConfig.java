@@ -67,5 +67,18 @@ public class WebConfig extends WebMvcConfigurationSupport {
         super.addInterceptors(registry);
     }
 
+    /**
+     * 支持全局跨域
+     * @param registry
+     */
+    @Override
+    protected void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("POST", "GET","OPTIONS")
+                .maxAge(3600)
+                .allowCredentials(true);
+        super.addCorsMappings(registry);
+    }
 
 }
