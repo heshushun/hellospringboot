@@ -90,7 +90,7 @@ public class JwtHelper {
             put("customerId","121");
             put("backURL","http://www.baidu.com");
         }});
-        System.out.printf(token);
+        System.out.printf(token+"\n");
         Claims claims = parseJWT(token, SECRET);
         System.out.println(claims);
     }

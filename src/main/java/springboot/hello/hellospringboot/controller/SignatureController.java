@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springboot.hello.hellospringboot.common.utils.SignKeyGenerator;
-import springboot.hello.hellospringboot.request.Req800001;
 import springboot.hello.hellospringboot.response.BaseResp;
 
 /**

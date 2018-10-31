@@ -34,6 +34,11 @@ import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @Author: hss
+ * @Date: 2018/10/30
+ * @Desc: HTTP请求工具
+ */
 public class HttpUtil {
     private static final Logger logger = LoggerFactory
         .getLogger(HttpUtil.class);
