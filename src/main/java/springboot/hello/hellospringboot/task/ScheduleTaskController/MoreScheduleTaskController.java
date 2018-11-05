@@ -82,7 +82,12 @@ public class MoreScheduleTaskController {
                     .build();
 
             scheduler.scheduleJob(jobDetail, cronTrigger);
+
+            //修改 启动状态
+            task.setTaskOnline("1");
+            taskService.updateById(task);
         }
+
         return new BaseResp(Boolean.TRUE,"调度初始化成功！！！");
     }
 

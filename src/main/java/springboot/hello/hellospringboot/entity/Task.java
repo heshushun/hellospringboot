@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ * 任务实体类
  * </p>
  *
  * @author hss
@@ -48,11 +48,16 @@ public class Task extends Model<Task> {
 	@TableField("task_cron")
 	private String taskCron;
     /**
-     * 任务执行状态
+     * 任务是否启用
      */
 	@TableField("task_status")
 	private String taskStatus;
 
+	/**
+	 * 任务启动状态
+	 */
+	@TableField("task_online")
+	private String taskOnline;
 
 	public Integer getTaskId() {
 		return taskId;
@@ -107,15 +112,24 @@ public class Task extends Model<Task> {
 		return this.taskId;
 	}
 
+	public String getTaskOnline() {
+		return taskOnline;
+	}
+
+	public void setTaskOnline(String taskOnline) {
+		this.taskOnline = taskOnline;
+	}
+
 	@Override
 	public String toString() {
 		return "Task{" +
-			"taskId=" + taskId +
-			", taskName=" + taskName +
-			", taskExeClass=" + taskExeClass +
-			", taskExeMethod=" + taskExeMethod +
-			", taskCron=" + taskCron +
-			", taskStatus=" + taskStatus +
-			"}";
+				"taskId=" + taskId +
+				", taskName='" + taskName + '\'' +
+				", taskExeClass='" + taskExeClass + '\'' +
+				", taskExeMethod='" + taskExeMethod + '\'' +
+				", taskCron='" + taskCron + '\'' +
+				", taskStatus='" + taskStatus + '\'' +
+				", taskOnline='" + taskOnline + '\'' +
+				'}';
 	}
 }

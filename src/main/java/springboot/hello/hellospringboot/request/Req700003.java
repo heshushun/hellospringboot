@@ -6,6 +6,9 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+/**
+ * 添加 用户 的入参
+ */
 public class Req700003 implements Serializable {
     private static final long serialVersionUID = -7323868806548711092L;
 

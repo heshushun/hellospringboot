@@ -4,6 +4,9 @@ package springboot.hello.hellospringboot.request;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+/**
+ * 删除用户 的入参
+ */
 public class Req700002  implements Serializable {
 
     private static final long serialVersionUID = -7323868806548711092L;

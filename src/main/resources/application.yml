@@ -1,6 +1,6 @@
 server:
   #address: localhost
-  port: 7002
+  port: 7003
 spring:
   application:
     name: hellospringboot

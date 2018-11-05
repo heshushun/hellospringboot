@@ -1,7 +1,9 @@
 package springboot.hello.hellospringboot.dao;
 
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import springboot.hello.hellospringboot.entity.Task;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import springboot.hello.hellospringboot.request.Req700006;
 
 import java.lang.String;
 import java.util.List;
@@ -23,5 +25,12 @@ public interface TaskDao extends BaseMapper<Task> {
      * @return
      */
     public List<Task> getOpenTaskList ();
+
+    /**
+     * 获取任务列表 （分页）
+     * @return
+     */
+    public List<Task> selectTaskList(Pagination page, Task task);
+
 
 }

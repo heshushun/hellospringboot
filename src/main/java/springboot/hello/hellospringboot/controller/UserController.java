@@ -7,6 +7,7 @@ import springboot.hello.hellospringboot.common.orika.OrikaBeanMapper;
 import springboot.hello.hellospringboot.entity.UserEntity;
 import springboot.hello.hellospringboot.request.*;
 import springboot.hello.hellospringboot.response.BaseResp;
+import springboot.hello.hellospringboot.response.Resp80001;
 import springboot.hello.hellospringboot.service.UserService;
 
 import javax.validation.Valid;
@@ -40,7 +41,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public BaseResp login(@Valid Req700005 res){
+    public BaseResp login(@RequestBody Req700005 res){
         String loginToken = userService.login(res);
         HashMap<String,Object> result = new HashMap<>();
         result.put("msg","登录成功！");
@@ -126,6 +127,17 @@ public class UserController {
     public BaseResp<UserEntity> getUserById(@Valid Req700004 req) {
         UserEntity userEntity = userService.getUserById(req.getId());
         return new BaseResp(Boolean.TRUE,userEntity);
+    }
+
+    /**
+     * 获取用户信息
+     * @return
+     */
+    @RequestMapping(value = "/info",method = RequestMethod.GET)
+    public BaseResp<Resp80001> info(){
+        Resp80001 resp80001 = new Resp80001();
+        resp80001.getRoles().add("admin");
+        return new BaseResp<>(resp80001);
     }
 
 
