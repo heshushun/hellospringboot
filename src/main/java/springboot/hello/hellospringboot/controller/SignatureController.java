@@ -3,14 +3,17 @@ package springboot.hello.hellospringboot.controller;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import springboot.hello.hellospringboot.common.utils.MD5Utils;
 import springboot.hello.hellospringboot.common.utils.SignKeyGenerator;
+import springboot.hello.hellospringboot.request.Req700008;
+import springboot.hello.hellospringboot.request.Req700012;
 import springboot.hello.hellospringboot.response.BaseResp;
 
 /**
@@ -67,6 +70,34 @@ public class SignatureController {
             logger.error(e.getMessage(), e);
             return new BaseResp(Boolean.FALSE,"获取失败");
         }
+    }
+
+
+
+    /**
+     * 获取MD5加密后的 签名
+     * @return
+     */
+    @RequestMapping(value = "/getSignature" ,method = RequestMethod.POST)
+    public BaseResp getSignature(@Valid Req700012 req){
+        try {
+
+            logger.info(">>>>>>>>>>>>>>>>>入参值：" + req.toString());
+
+            String inputStr = req.getBranchCode()+req.getChannel()+req.getSecretKey()+req.getDeviceId()+req.getTimestamp();//加密原值
+            logger.info(">>>>>>>>>>>>>>>>>加密前原值：" + inputStr);
+
+            MD5Utils md5Utils = new MD5Utils();
+
+            String outputStr = md5Utils.md5(inputStr).toUpperCase();//生成加密密值
+            logger.info(">>>>>>>>>>>>>>>>>加密后的值：" + outputStr);
+
+            return new BaseResp(Boolean.TRUE, outputStr);
+        }catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            return new BaseResp(Boolean.FALSE,"获取失败");
+        }
+
     }
 
 }

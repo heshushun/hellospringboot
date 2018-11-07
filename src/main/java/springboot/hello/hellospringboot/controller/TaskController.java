@@ -39,7 +39,7 @@ public class TaskController {
     private OrikaBeanMapper orikaBeanMapper;
 
     /**
-     * 用户列表（分页）
+     * 任务列表（分页）
      *
      * @return
      */
@@ -59,7 +59,7 @@ public class TaskController {
     }
 
     /**
-     * 删除用户列表
+     * 通过ID删除任务
      * @return
      */
     @RequestMapping(value = "/deleteTaskById" ,method = RequestMethod.POST)

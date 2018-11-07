@@ -90,6 +90,8 @@ public class AccessTokenInterceptor implements HandlerInterceptor {
         list.add("/quartz/task/resumeJob");
         list.add("/quartz/task/deleteJob");
         list.add("/quartz/task/getJobStatus");
+        list.add("/signature/getSign");
+        list.add("/signature/getSignature");
         Long count = list.stream().filter(u -> matcher.match(u, uri)).count();
         return count > 0 ? Boolean.TRUE : Boolean.FALSE;
     }
