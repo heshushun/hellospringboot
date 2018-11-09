@@ -1,7 +1,7 @@
 package springboot.hello.hellospringboot.service.impl;
 
 import springboot.hello.hellospringboot.entity.Company;
-import springboot.hello.hellospringboot.dao.CompanyDao;
+import springboot.hello.hellospringboot.dao.destDao.CompanyDao;
 import springboot.hello.hellospringboot.service.CompanyService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

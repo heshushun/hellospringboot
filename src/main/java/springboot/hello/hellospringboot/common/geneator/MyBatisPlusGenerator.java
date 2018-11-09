@@ -85,8 +85,8 @@ public class MyBatisPlusGenerator {
         PackageConfig pc = new PackageConfig();
         pc.setParent(null);
         pc.setEntity("springboot.hello.hellospringboot.entity");
-        pc.setMapper("springboot.hello.hellospringboot.dao");
-        pc.setXml("springboot.hello.hellospringboot.dao.mapping");
+        pc.setMapper("springboot.hello.hellospringboot.dao.destDao");
+        pc.setXml("springboot.hello.hellospringboot.dao.destDao.mapping");
         pc.setService("springboot.hello.hellospringboot.service");
         pc.setServiceImpl("springboot.hello.hellospringboot.service.impl");
         pc.setController("springboot.hello.hellospringboot.controller");

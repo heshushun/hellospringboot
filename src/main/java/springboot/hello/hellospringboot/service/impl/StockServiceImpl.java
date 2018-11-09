@@ -1,12 +1,10 @@
 package springboot.hello.hellospringboot.service.impl;
 
 import springboot.hello.hellospringboot.entity.Stock;
-import springboot.hello.hellospringboot.dao.StockDao;
+import springboot.hello.hellospringboot.dao.destDao.StockDao;
 import springboot.hello.hellospringboot.service.StockService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
-
-import java.util.Stack;
 
 /**
  * <p>

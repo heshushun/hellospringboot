@@ -3,16 +3,17 @@ package springboot.hello.hellospringboot.service.impl;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import com.baomidou.mybatisplus.plugins.Page;
 import org.springframework.stereotype.Service;
+import springboot.hello.hellospringboot.common.annotation.DataSource;
+import springboot.hello.hellospringboot.common.enums.DataSourceEnum;
 import springboot.hello.hellospringboot.common.exception.BizException;
 import springboot.hello.hellospringboot.common.exception.builder.ErrorBuilder;
 import springboot.hello.hellospringboot.common.helper.JwtHelper;
 import springboot.hello.hellospringboot.common.utils.MD5Hash;
-import springboot.hello.hellospringboot.dao.UserDao;
+import springboot.hello.hellospringboot.dao.destDao.UserDao;
 import springboot.hello.hellospringboot.entity.UserEntity;
 import springboot.hello.hellospringboot.request.Req700005;
 import springboot.hello.hellospringboot.service.UserService;
@@ -43,11 +44,13 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
      * @return
      */
     @Override
+    //@DataSource(DataSourceEnum.DB1)
     public String login(Req700005 res) {
+
         //先从数据库获取用户
         UserEntity user = new UserEntity();
         user.setAccount(res.getAccount());
-        UserEntity user1 = userDao.selectByAccount(user);
+        UserEntity user1 = this.baseMapper.selectByAccount(user);
 
         //1、 先看用户是否可用
         Integer status = user1.getStatus();
@@ -144,6 +147,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
      * @return
      */
     @Override
+    //@DataSource(DataSourceEnum.DB1)
     public UserEntity getUserById(Integer id) {
         return this.baseMapper.selectById(id);
     }

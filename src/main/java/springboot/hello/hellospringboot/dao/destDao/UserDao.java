@@ -1,4 +1,4 @@
-package springboot.hello.hellospringboot.dao;
+package springboot.hello.hellospringboot.dao.destDao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;

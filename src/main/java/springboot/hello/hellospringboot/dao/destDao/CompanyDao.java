@@ -1,4 +1,4 @@
-package springboot.hello.hellospringboot.dao;
+package springboot.hello.hellospringboot.dao.destDao;
 
 import springboot.hello.hellospringboot.entity.Company;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
