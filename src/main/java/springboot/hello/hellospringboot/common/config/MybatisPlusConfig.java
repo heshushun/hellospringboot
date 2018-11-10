@@ -31,7 +31,7 @@ import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
  * @since 2018-10-09
  */
 @Configuration
-@MapperScan(basePackages = {"springboot.hello.hellospringboot.dao"})
+@MapperScan(basePackages = {"springboot.hello.hellospringboot.dao.*"})
 public class MybatisPlusConfig {
 
     private final static Logger logger = LoggerFactory.getLogger(MybatisPlusConfig.class);

@@ -115,7 +115,7 @@ mybatis-plus:
     jdbc-type-for-null: 'null'
 
 
-#########全局配置项 异常配置############
+##############全局配置项 异常配置#################
 system:
   ###### 当异常出现时，使用json返回
   isAjax: true

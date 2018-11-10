@@ -22,4 +22,12 @@
 		<result column="used_names" property="usedNames" />
 	</resultMap>
 
+
+	<!-- 清空目的库 股票 -->
+	<delete id="deleteByStockCode" parameterType="java.lang.String">
+		delete from t_company
+		WHERE  stock_code = #{stockCode,jdbcType=VARCHAR}
+	</delete>
+
+
 </mapper>

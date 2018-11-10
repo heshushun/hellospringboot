@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springboot.hello.hellospringboot.dao.yunDao.YunCompanyDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="springboot.hello.hellospringboot.entity.Company">
+        <id column="stock_code" property="stockCode" />
+        <result column="name" property="name" />
+        <result column="abbr_name" property="abbrName" />
+        <result column="province" property="province" />
+        <result column="city" property="city" />
+        <result column="listed_date" property="listedDate" />
+        <result column="issue_price" property="issuePrice" />
+        <result column="reg_capital" property="regCapital" />
+        <result column="legal_repr" property="legalRepr" />
+        <result column="contact_tel" property="contactTel" />
+        <result column="website" property="website" />
+        <result column="business_major" property="businessMajor" />
+        <result column="industry" property="industry" />
+        <result column="establishment_date" property="establishmentDate" />
+        <result column="first_open_price" property="firstOpenPrice" />
+        <result column="used_names" property="usedNames" />
+    </resultMap>
+
+
+    <!-- 根据股票代码获取 公司 -->
+    <select id="getCompanyByStockCode"  parameterType="java.lang.String"  resultMap="BaseResultMap">
+        SELECT
+        c_stock_code as stock_code,
+        c_name as name,
+        c_abbr_name as abbr_name,
+        c_province as province,
+        c_city as city,
+        d_listed_date as listed_date,
+        b_issue_price as issue_price,
+        b_reg_capital as reg_capital,
+        c_legal_repr as legal_repr,
+        c_contact_tel as contact_tel,
+        c_website as website,
+        c_business_major as business_major,
+        c_industry as industry,
+        d_establishment_date as establishment_date,
+        b_first_open_price as first_open_price,
+        c_used_names as used_names
+        FROM t_biz_company
+        WHERE  c_stock_code = #{stockCode,jdbcType=VARCHAR}
+    </select>
+
+
+
+</mapper>

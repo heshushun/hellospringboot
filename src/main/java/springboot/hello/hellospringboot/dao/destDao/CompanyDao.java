@@ -13,4 +13,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface CompanyDao extends BaseMapper<Company> {
 
+    // 根据股票代码删除 公司
+    public int deleteByStockCode (String stockCode);
+
 }

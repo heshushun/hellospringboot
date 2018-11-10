@@ -60,7 +60,7 @@ public class MyBatisPlusGenerator {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setTablePrefix(new String[]{"t_"});// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[]{"t_company"}); // 需要生成的表
+        strategy.setInclude(new String[]{"t_stockinfo"}); // 需要生成的表
 
         // 排除生成的表
         /*strategy.setExclude(new String[]{"qrtz_blob_triggers","qrtz_calendars"}); */
@@ -86,7 +86,7 @@ public class MyBatisPlusGenerator {
         pc.setParent(null);
         pc.setEntity("springboot.hello.hellospringboot.entity");
         pc.setMapper("springboot.hello.hellospringboot.dao.destDao");
-        pc.setXml("springboot.hello.hellospringboot.dao.destDao.mapping");
+        pc.setXml("springboot.hello.hellospringboot.dao.destDao.mapper");
         pc.setService("springboot.hello.hellospringboot.service");
         pc.setServiceImpl("springboot.hello.hellospringboot.service.impl");
         pc.setController("springboot.hello.hellospringboot.controller");

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springboot.hello.hellospringboot.dao.yunDao.YunStockinfoDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="springboot.hello.hellospringboot.entity.Stockinfo">
+        <id column="stock_code" property="stockCode" />
+        <result column="company_code" property="companyCode" />
+        <result column="inner_code" property="innerCode" />
+    </resultMap>
+
+    <!-- 从源库采集 股票数据 -->
+    <select id="list" resultMap="BaseResultMap">
+        SELECT
+        c_stock_code as stock_code,
+        l_company_code as company_code,
+        l_inner_code as inner_code
+        FROM t_biz_stock
+    </select>
+
+</mapper>
