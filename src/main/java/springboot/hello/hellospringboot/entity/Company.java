@@ -49,7 +49,7 @@ public class Company extends Model<Company> {
      * 上市日期
      */
 	@TableField("listed_date")
-	private Date listedDate;
+	private String listedDate;
     /**
      * 每股发行价
      */
@@ -87,7 +87,7 @@ public class Company extends Model<Company> {
      * 成立日期
      */
 	@TableField("establishment_date")
-	private Date establishmentDate;
+	private String establishmentDate;
     /**
      * 首日开盘价
      */
@@ -99,6 +99,9 @@ public class Company extends Model<Company> {
 	@TableField("used_names")
 	private String usedNames;
 
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
 
 	public String getStockCode() {
 		return stockCode;
@@ -140,11 +143,11 @@ public class Company extends Model<Company> {
 		this.city = city;
 	}
 
-	public Date getListedDate() {
+	public String getListedDate() {
 		return listedDate;
 	}
 
-	public void setListedDate(Date listedDate) {
+	public void setListedDate(String listedDate) {
 		this.listedDate = listedDate;
 	}
 
@@ -204,11 +207,11 @@ public class Company extends Model<Company> {
 		this.industry = industry;
 	}
 
-	public Date getEstablishmentDate() {
+	public String getEstablishmentDate() {
 		return establishmentDate;
 	}
 
-	public void setEstablishmentDate(Date establishmentDate) {
+	public void setEstablishmentDate(String establishmentDate) {
 		this.establishmentDate = establishmentDate;
 	}
 

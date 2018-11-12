@@ -29,5 +29,52 @@
 		WHERE  stock_code = #{stockCode,jdbcType=VARCHAR}
 	</delete>
 
+	<!-- 分页查询 -->
+	<select id="selectCompanyList"  parameterType="springboot.hello.hellospringboot.entity.Company" resultMap="BaseResultMap">
+		SELECT
+		stock_code,
+		name,
+		abbr_name,
+		province,
+		city,
+		DATE_FORMAT(listed_date,'%Y-%m-%d') as listed_date,
+		issue_price,
+		reg_capital,
+		legal_repr,
+		contact_tel,
+		website,
+		business_major,
+		industry,
+		DATE_FORMAT(establishment_date,'%Y-%m-%d') as establishment_date,
+		first_open_price,
+		used_names
+		FROM t_company
+		<where>
+			<if test="name != null and name != ''">
+				AND ( stock_code  = #{name}
+				OR  name like CONCAT('%',#{name},'%')
+				OR abbr_name  like CONCAT('%',#{name},'%')
+				OR used_names  like CONCAT('%',#{name},'%')
+				OR legal_repr  = #{name}
+				)
+			</if>
+			<if test="province != null and province != ''">
+				AND  province  = #{province}
+			</if>
+			<if test="industry != null and industry != ''">
+				AND  industry  = #{industry}
+			</if>
+		</where>
+	</select>
+
+	<!-- 获取行业列表 -->
+	<select id="getIndustryList"  resultType="java.lang.String">
+		SELECT
+		DISTINCT industry
+		FROM t_company
+		<where>
+			industry is not null
+		</where>
+	</select>
 
 </mapper>
