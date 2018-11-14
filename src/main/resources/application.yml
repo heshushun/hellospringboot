@@ -158,3 +158,10 @@ stock:
 
 ### 防篡改加签-签名密钥
 shakey: LUTqZb3IkHjKcH3xjQcpqfZvWvNjQ4760KjZb3VBXmJ4Y9zwK5egrkIQK05DaCiq4vlxqAEvUzDTsl8vwlYNWJpozHxRjbSXr6gBcMxPtRbtPcLRkgwhgvD/3k054XnKFlmbQW5y716VSFkjLQnjY91c+HoAO4IiWpsYOUD+ZX4=
+
+#图片保存地址
+main-dir: /home/upload
+
+#图片访问地址
+visit-url: http://47.98.204.145/img/
+

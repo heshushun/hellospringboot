@@ -34,7 +34,7 @@ public class FileController {
      * @return
      */
     @RequestMapping(value = "/toByteArray",method = RequestMethod.POST)
-    public String deleteNewsById(@Valid Req700014 req) throws IOException {
+    public String fileToByteArray(@Valid Req700014 req) throws IOException {
         Assert.notNull(req.getFilePath(),"文件不能为空");
         byte[] file_bytes = fileUtils.getContent(req.getFilePath());
         StringBuilder sb = new StringBuilder(file_bytes.length * 2);

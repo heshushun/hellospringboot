@@ -25,7 +25,7 @@ public class FileUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(FileUtils.class);
 
-
+    //文件 转 字节数组 方式一
     public byte[] getContent(String filePath) throws IOException {
         File file = new File(filePath);
         long fileSize = file.length();
@@ -48,15 +48,7 @@ public class FileUtils {
         return buffer;
     }
 
-
-
-    /**
-     * the traditional io way
-     *
-     * @param filename
-     * @return
-     * @throws IOException
-     */
+    //文件 转 字节数组 方式二
     public static byte[] toByteArray(String filename) throws IOException {
 
         File f = new File(filename);
@@ -88,15 +80,7 @@ public class FileUtils {
         }
     }
 
-
-
-    /**
-     * NIO way
-     *
-     * @param filename
-     * @return
-     * @throws IOException
-     */
+    //文件 转 字节数组 方式三
     public static byte[] toByteArray2(String filename) throws IOException {
 
         File f = new File(filename);
@@ -131,14 +115,9 @@ public class FileUtils {
         }
     }
 
-
-
     /**
+     * 文件 转 字节数组 方式四
      * Mapped File way MappedByteBuffer 可以在处理大文件时，提升性能
-     *
-     * @param filename
-     * @return
-     * @throws IOException
      */
     public static byte[] toByteArray3(String filename) throws IOException {
 
@@ -164,21 +143,5 @@ public class FileUtils {
             }
         }
     }
-
-    public static String bytes2String(byte[] bytes)
-    {
-        final String HEX = "0123456789abcdef";
-        StringBuilder sb = new StringBuilder(bytes.length * 2);
-        for (byte b : bytes)
-        {
-            // 取出这个字节的高4位，然后与0x0f与运算，得到一个0-15之间的数据，通过HEX.charAt(0-15)即为16进制数
-            sb.append(HEX.charAt((b >> 4) & 0x0f));
-            // 取出这个字节的低位，与0x0f与运算，得到一个0-15之间的数据，通过HEX.charAt(0-15)即为16进制数
-            sb.append(HEX.charAt(b & 0x0f));
-        }
-
-        return sb.toString();
-    }
-
 
 }
