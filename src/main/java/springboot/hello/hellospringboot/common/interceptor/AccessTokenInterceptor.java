@@ -93,6 +93,7 @@ public class AccessTokenInterceptor implements HandlerInterceptor {
         list.add("/signature/getSign");
         list.add("/signature/getSignature");
         list.add("/user/get");
+        list.add("/file/toByteArray");
         Long count = list.stream().filter(u -> matcher.match(u, uri)).count();
         return count > 0 ? Boolean.TRUE : Boolean.FALSE;
     }
