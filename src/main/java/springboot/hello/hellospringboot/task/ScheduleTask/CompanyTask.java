@@ -64,7 +64,7 @@ public class CompanyTask implements Job{
         try{
             Company company = null;
             Stockinfo stockinfo = null;
-            List<Stockinfo> stockinfoList = companyTask.stockinfoService.list();
+            List<Stockinfo> stockinfoList = companyTask.stockinfoService.stocklist(Stockinfo.class);// 从缓存中取股票
 
             for(int i= 0; i<stockinfoList.size();i++){
                 stockinfo = stockinfoList.get(i);

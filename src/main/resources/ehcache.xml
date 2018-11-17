@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd" >
+         
+	<!-- stock 缓存 -->
+	<cache name="stockCache"
+		maxEntriesLocalHeap="10"
+		eternal="true"
+		timeToIdleSeconds="5"
+		timeToLiveSeconds="5"
+		overflowToDisk="true"
+		memoryStoreEvictionPolicy="LRU"/>
+
+</ehcache>

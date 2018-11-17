@@ -29,4 +29,10 @@ public interface StockinfoService extends IService<Stockinfo> {
     //获取所有股票列表
     public List<Stockinfo> list ();
 
+    //初始化股票列表到缓存
+    public void initToCache(List<Stockinfo> stockList);
+
+    //从缓存中取股票数据
+    public <T> List<T> stocklist(Class<T> clazz);
+
 }

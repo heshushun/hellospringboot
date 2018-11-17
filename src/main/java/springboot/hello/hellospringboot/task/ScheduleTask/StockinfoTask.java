@@ -70,6 +70,8 @@ public class StockinfoTask implements Job {
                 stockinfoTask.stockinfoService.deleteStocksInfo();
                 //将查询到的数据 批量插入目的库中
                 stockinfoTask.stockinfoService.insertBatchStocksInfo(stockinfoList);
+                //同时 将查询到的数据 初始化到缓存 中
+                stockinfoTask.stockinfoService.initToCache(stockinfoList);
 
                 logger.info("============》股票信息已同步到目的库中");
             }else{
