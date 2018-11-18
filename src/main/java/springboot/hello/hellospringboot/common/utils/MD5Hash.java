@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * @Author: hss
  * @Date: 2018/10/30
- * @Desc: MD5Hash 加密
+ * @Desc: MD5Hash 加密 （实现 密码加密）
  */
 public class MD5Hash {
 

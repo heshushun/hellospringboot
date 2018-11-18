@@ -2,6 +2,14 @@ package springboot.hello.hellospringboot.common.utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * <p>
+ *  MD5加密 工具类（普通）
+ * </p>
+ *
+ * @author hss
+ * @since 2018-11-17
+ */
 public final class MD5Utils
 {
     private static final String[] hexDigits = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };

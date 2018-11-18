@@ -1,17 +1,24 @@
 package springboot.hello.hellospringboot.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import springboot.hello.hellospringboot.common.orika.OrikaBeanMapper;
+import springboot.hello.hellospringboot.common.utils.ExcelExportUtil;
+import springboot.hello.hellospringboot.common.utils.ExcelReadUtil;
 import springboot.hello.hellospringboot.entity.UserEntity;
 import springboot.hello.hellospringboot.request.*;
 import springboot.hello.hellospringboot.response.BaseResp;
 import springboot.hello.hellospringboot.response.Resp80001;
 import springboot.hello.hellospringboot.service.UserService;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -28,6 +35,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    private  final static Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -138,6 +147,69 @@ public class UserController {
         Resp80001 resp80001 = new Resp80001();
         resp80001.getRoles().add("admin");
         return new BaseResp<>(resp80001);
+    }
+
+    /**
+     * 导入用户信息
+     * @return
+     */
+    @RequestMapping(value = "/excelReadUser",method = RequestMethod.POST)
+    public BaseResp excelReadUser(@Valid Req700014 req){
+        ExcelReadUtil<UserEntity> excelReadUtil = new ExcelReadUtil<UserEntity>(UserEntity.class);
+        List<UserEntity> users = null;
+        try {
+            users = excelReadUtil.readExcel(req.getFilePath(), 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new BaseResp<>(Boolean.FALSE,"导入用户失败");
+        }
+
+        if(users.size()!=0||users!=null) {
+            for (UserEntity user : users) {
+                logger.info("导入读取的数据：" + user.toString());
+            }
+            userService.saveUserList(users);//批量插入数据库
+        }else {
+            return new BaseResp<>(Boolean.FALSE,"导入表格无数据");
+        }
+
+        return new BaseResp<>(Boolean.TRUE,"导入用户成功");
+    }
+
+    /**
+     * 导出用户信息
+     * @return
+     */
+    @RequestMapping(value = "/excelExportUser",method = RequestMethod.POST)
+    public BaseResp excelExportUser(HttpServletResponse response, String fileName){
+        ExcelExportUtil<UserEntity> excelExportUtil = new ExcelExportUtil<UserEntity>(UserEntity.class);
+        List<UserEntity> userlist = null;
+        String excelName = "userList";
+        if(!StringUtils.isEmpty(fileName)){
+            excelName = fileName;
+        }
+        try {
+            userlist = userService.list();
+            if(userlist.size()!=0||userlist!=null) {
+
+                // 告诉浏览器用什么软件可以打开此文件
+                response.setHeader("content-Type", "application/vnd.ms-excel");
+                // 下载文件的默认名称 浏览器会弹窗另存为
+                response.setHeader("Content-Disposition", "attachment;filename*=utf-8'zh_cn'" + URLEncoder.encode( excelName, "UTF-8") + ".xls");
+                //编码
+                response.setCharacterEncoding("UTF-8");
+
+                // 基于注解导出
+                excelExportUtil.exportAsAop(excelName,"templet.xls", userlist, 4);
+            }else {
+                return new BaseResp<>(Boolean.FALSE,"导出表格无数据");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new BaseResp<>(Boolean.FALSE,"导出用户失败");
+        }
+
+        return new BaseResp<>(Boolean.TRUE,"导出用户成功");
     }
 
 

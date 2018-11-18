@@ -4,6 +4,9 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
 
+/**
+ * 文件传参
+ */
 public class Req700014 implements Serializable {
 
     private static final long serialVersionUID = -7323868806548711092L;
