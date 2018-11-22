@@ -52,14 +52,14 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
         user.setAccount(res.getAccount());
         UserEntity user1 = this.baseMapper.selectByAccount(user);
 
-        //1、 先看用户是否可用
+        //1、判断该用户是否存在
+        if (user1 == null) {
+            throw new BizException(ErrorBuilder.buildBizError("400", "你好，该账户不存在"));
+        }
+        //2、 先看用户是否可用
         Integer status = user1.getStatus();
         if (status == 0) {
             throw new BizException(ErrorBuilder.buildBizError("400", "账户已被冻结,请联系管理员处理！"));
-        }
-        //2、判断该用户是否存在
-        if (user1 == null) {
-            throw new BizException(ErrorBuilder.buildBizError("400", "账户密码错误"));
         }
         //3、验证密码是否正确
         try {

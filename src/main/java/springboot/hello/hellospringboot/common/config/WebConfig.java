@@ -75,7 +75,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
     protected void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("*")
-                .allowedMethods("POST", "GET","OPTIONS")
+                .allowedMethods("POST", "GET", "DELETE", "PUT", "OPTIONS")
                 .maxAge(3600)
                 .allowCredentials(true);
         super.addCorsMappings(registry);

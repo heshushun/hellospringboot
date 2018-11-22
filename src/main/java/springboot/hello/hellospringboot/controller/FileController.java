@@ -37,6 +37,7 @@ public class FileController {
     public String fileToByteArray(@Valid Req700014 req) throws IOException {
         Assert.notNull(req.getFilePath(),"文件不能为空");
         byte[] file_bytes = fileUtils.getContent(req.getFilePath());
+
         StringBuilder sb = new StringBuilder(file_bytes.length * 2);
         for (int i=0;i<file_bytes.length-1; i++) {
             sb.append(file_bytes[i]);

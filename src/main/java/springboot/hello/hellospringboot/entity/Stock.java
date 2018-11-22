@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ * 股票行情
  * </p>
  *
  * @author hss

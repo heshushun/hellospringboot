@@ -34,7 +34,8 @@ public class ExcelExportUtil<T> {
 
     /**
      * 基于模板导出
-     * @param fileName 模板名称
+     * @param fileName 文件名称
+     * @param templet 模板名称
      * @param objs 导出实体集合
      * @param rowIndex excel第几行开始导出
      */
@@ -77,7 +78,8 @@ public class ExcelExportUtil<T> {
     /**
      * 基于注解导出
      * 不需要自己封装每列的值
-     * @param fileName 模板名称
+     * @param fileName 文件名称
+     * @param templet 模板名称
      * @param objs 导出实体集合
      * @param rowIndex excel第几行开始导出
      */

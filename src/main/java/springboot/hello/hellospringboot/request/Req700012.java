@@ -16,7 +16,7 @@ public class Req700012 implements Serializable {
     /**
      * 机构代码
      */
-    @NotBlank(message = "branchCode不能为空")
+    /*@NotBlank(message = "branchCode不能为空")*/
     private String branchCode;
 
     /**

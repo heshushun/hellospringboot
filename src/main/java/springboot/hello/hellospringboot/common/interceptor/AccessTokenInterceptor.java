@@ -70,7 +70,6 @@ public class AccessTokenInterceptor implements HandlerInterceptor {
         } else {
             throw new BizException(ErrorBuilder.buildBizError(8888,"8888","非法访问"));
         }
-
         return false;
     }
 

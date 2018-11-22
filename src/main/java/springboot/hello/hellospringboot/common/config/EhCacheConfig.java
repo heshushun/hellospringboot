@@ -6,6 +6,7 @@ import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.UrlResource;
 
 import java.net.MalformedURLException;
@@ -30,7 +31,7 @@ public class EhCacheConfig {
     @Bean
     public EhCacheManagerFactoryBean ehcache() throws MalformedURLException {
         EhCacheManagerFactoryBean factoryBean = new EhCacheManagerFactoryBean();
-        factoryBean.setConfigLocation(new UrlResource("classpath:/ehcache.xml"));
+        factoryBean.setConfigLocation(new ClassPathResource("ehcache.xml"));
         factoryBean.getObject();
         return factoryBean;
 

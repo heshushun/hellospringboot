@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ * 股票信息
  * </p>
  *
  * @author hss

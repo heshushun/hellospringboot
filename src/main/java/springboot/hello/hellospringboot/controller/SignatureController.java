@@ -84,7 +84,8 @@ public class SignatureController {
 
             logger.info(">>>>>>>>>>>>>>>>>入参值：" + req.toString());
 
-            String inputStr = req.getBranchCode()+req.getChannel()+req.getSecretKey()+req.getDeviceId()+req.getTimestamp();//加密原值
+            //String inputStr = req.getBranchCode()+req.getChannel()+req.getSecretKey()+req.getDeviceId()+req.getTimestamp();//加密原值
+            String inputStr = req.getChannel()+req.getSecretKey()+req.getDeviceId()+req.getTimestamp();//加密原值
             logger.info(">>>>>>>>>>>>>>>>>加密前原值：" + inputStr);
 
             MD5Utils md5Utils = new MD5Utils();
