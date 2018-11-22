@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springboot.hello.hellospringboot.dao.destDao.TaskDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="springboot.hello.hellospringboot.entity.Task">
+		<id column="task_id" property="taskId" />
+		<result column="task_name" property="taskName" />
+		<result column="task_exe_class" property="taskExeClass" />
+		<result column="task_exe_method" property="taskExeMethod" />
+		<result column="task_cron" property="taskCron" />
+		<result column="task_status" property="taskStatus" />
+		<result column="task_online" property="taskOnline" />
+	</resultMap>
+
+	<select id="getTaskCron" resultType="String" >
+		SELECT task_cron  FROM t_task WHERE task_id=1
+	</select>
+
+
+	<select id="getOpenTaskList" resultType="springboot.hello.hellospringboot.entity.Task" >
+		SELECT *  FROM t_task WHERE task_status = 1
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="selectTaskList"  parameterType="springboot.hello.hellospringboot.entity.Task" resultMap="BaseResultMap">
+		SELECT * FROM t_task
+		<where>
+			<if test="taskName != null and taskName != ''">
+				AND ( task_id  = #{taskName}
+				      OR task_name  like CONCAT('%',#{taskName},'%')
+				      OR task_exe_class  like CONCAT('%',#{taskName},'%')
+				      OR task_exe_method  like CONCAT('%',#{taskName},'%')
+				      OR task_cron  like CONCAT('%',#{taskName},'%')
+				)
+			</if>
+			<if test="taskStatus != null and taskStatus != ''">
+				AND  task_status  = #{taskStatus}
+			</if>
+			<if test="taskOnline != null and taskOnline != ''">
+				AND  task_online  = #{taskOnline}
+			</if>
+		</where>
+	</select>
+
+</mapper>
