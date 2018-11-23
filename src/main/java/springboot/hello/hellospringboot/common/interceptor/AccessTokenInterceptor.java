@@ -95,6 +95,8 @@ public class AccessTokenInterceptor implements HandlerInterceptor {
         list.add("/file/toByteArray");
         list.add("/user/excelReadUser");
         list.add("/user/excelExportUser");
+        list.add("/testresult/getTs");
+        list.add("/testresult/exportTestResult");
         Long count = list.stream().filter(u -> matcher.match(u, uri)).count();
         return count > 0 ? Boolean.TRUE : Boolean.FALSE;
     }

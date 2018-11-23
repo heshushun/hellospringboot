@@ -126,6 +126,65 @@ public class ExcelExportUtil<T> {
         }
     }
 
+    /**
+     * 基于注解导出 2  （测试结果）
+     * 不需要自己封装每列的值
+     * @param fileName 文件名称
+     * @param templet 模板名称
+     * @param objs 导出实体集合
+     * @param rowIndex excel第几行开始导出
+     */
+    public void exportAsAop2(String fileName,String templet, List<T> objs, int rowIndex,Integer[] testresultCount) {
+        POIFSFileSystem fs = null;
+        FileOutputStream os = null;
+        try {
+            // classpath 下的模板excel文件
+            fs = new POIFSFileSystem(Thread.currentThread().getContextClassLoader().getResourceAsStream(templet));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            // 带注解并排序好的字段
+            List<Field> fieldList = getFieldList();
+
+            HSSFWorkbook workbook = new HSSFWorkbook(fs);
+            HSSFCellStyle style = setCellStyle(workbook);
+            HSSFSheet sheet = workbook.getSheetAt(0);
+
+            HSSFRow row_count = sheet.getRow(2);
+            for (int k = 0;  k<=2; k++){
+                HSSFCell cell_count = row_count.getCell((k*2)+1);
+                cell_count.setCellStyle(style);
+                cell_count.setCellValue(testresultCount[k]);
+            }
+
+            for (int i = 0; i < objs.size(); i++) {
+                HSSFRow row = sheet.createRow(i + rowIndex - 1);
+                for (int j = 0; j < fieldList.size(); j++) {
+                    HSSFCell cell = row.createCell(j);
+                    cell.setCellStyle(style);
+                    Field field = fieldList.get(j);
+
+                    String fieldValue = covertAttrType(field, objs.get(i));
+                    cell.setCellValue(fieldValue);
+                }
+            }
+
+            os = new FileOutputStream(new File("D:\\"+fileName+".xls"));
+            //os = new FileOutputStream(new File(fileName+".xls"));
+            workbook.write(os);
+        } catch (Exception e) {
+            throw new RRException("导出失败",e);
+        } finally {
+            if (os != null) {
+                try {
+                    os.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     /**
      * 设置样式
@@ -134,7 +193,7 @@ public class ExcelExportUtil<T> {
     private HSSFCellStyle setCellStyle(HSSFWorkbook workbook) {
         HSSFCellStyle style = workbook.createCellStyle();
         HSSFFont font = workbook.createFont();
-        font.setFontHeightInPoints((short) 12);
+        font.setFontHeightInPoints((short) 10);
         style.setFont(font);
         style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
         style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
