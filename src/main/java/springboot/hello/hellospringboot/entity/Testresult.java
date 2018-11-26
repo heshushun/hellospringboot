@@ -79,6 +79,11 @@ public class Testresult extends Model<Testresult> {
      */
 	@TableField("create_time")
 	private String createTime;
+	/**
+	 * 用户账号
+	 */
+	@TableField("user_account")
+	private String userAccount;
 
 
 	public Integer getId() {
@@ -161,6 +166,14 @@ public class Testresult extends Model<Testresult> {
 		this.createTime = createTime;
 	}
 
+	public String getUserAccount() {
+		return userAccount;
+	}
+
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -169,16 +182,17 @@ public class Testresult extends Model<Testresult> {
 	@Override
 	public String toString() {
 		return "Testresult{" +
-			"id=" + id +
-			", project=" + project +
-			", group1=" + group1 +
-			", functionId=" + functionId +
-			", requestMsg=" + requestMsg +
-			", expectResult=" + expectResult +
-			", responceResult=" + responceResult +
-			", responceCode=" + responceCode +
-			", status=" + status +
-			", createTime=" + createTime +
-			"}";
+				"id=" + id +
+				", project='" + project + '\'' +
+				", group1='" + group1 + '\'' +
+				", functionId='" + functionId + '\'' +
+				", requestMsg='" + requestMsg + '\'' +
+				", expectResult='" + expectResult + '\'' +
+				", responceResult='" + responceResult + '\'' +
+				", responceCode='" + responceCode + '\'' +
+				", status='" + status + '\'' +
+				", createTime='" + createTime + '\'' +
+				", userAccount='" + userAccount + '\'' +
+				'}';
 	}
 }

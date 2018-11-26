@@ -1,23 +1,21 @@
 package springboot.hello.hellospringboot.request;
 
-import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.plugins.Page;
-import org.hibernate.validator.constraints.NotBlank;
-import springboot.hello.hellospringboot.common.annotation.ExceVo;
-import springboot.hello.hellospringboot.entity.Company;
 import springboot.hello.hellospringboot.entity.Testresult;
 
 import java.io.Serializable;
 
-public class Req700015 implements Serializable {
+/**
+ * <p>
+ * 测试结果 分页 传参
+ * </p>
+ *
+ * @author hss
+ * @since 2018-11-24
+ */
+public class Req700016 extends Page<Testresult> implements Serializable {
 
     private static final long serialVersionUID = -7323868806548711092L;
-
-    /**
-     * 文件名称
-     */
-    private String fileName;
-
 
     /**
      * 分组
@@ -40,15 +38,6 @@ public class Req700015 implements Serializable {
      */
     private String userAccount;
 
-
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
 
     public String getGroup1() {
         return group1;
@@ -89,4 +78,6 @@ public class Req700015 implements Serializable {
     public void setUserAccount(String userAccount) {
         this.userAccount = userAccount;
     }
+
+
 }

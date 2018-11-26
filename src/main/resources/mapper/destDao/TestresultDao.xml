@@ -14,10 +14,11 @@
 		<result column="responce_code" property="responceCode" />
 		<result column="status" property="status" />
 		<result column="create_time" property="createTime" />
+		<result column="user_account" property="userAccount" />
 	</resultMap>
 
 
-	<!-- 分页查询 -->
+	<!-- 查询列表 -->
 	<select id="list"  parameterType="springboot.hello.hellospringboot.request.Req700015" resultMap="BaseResultMap">
 		SELECT * FROM t_testresult
 		<where>
@@ -32,6 +33,44 @@
 			</if>
 			<if test="status != null and status != ''">
 				AND  status  = #{status}
+			</if>
+			<if test="userAccount != null and userAccount != ''">
+				AND  user_account  = #{userAccount}
+			</if>
+		</where>
+	</select>
+
+	<!-- 查询列表（分页） -->
+	<select id="selectTestresultList"  parameterType="springboot.hello.hellospringboot.request.Req700015" resultMap="BaseResultMap">
+		SELECT * FROM t_testresult
+		<where>
+			<if test="project != null and project != ''">
+				AND  project  like CONCAT('%',#{project},'%')
+			</if>
+			<if test="group1 != null and group1 != ''">
+				AND  group1  = #{group1}
+			</if>
+			<if test="responceCode != null and responceCode != ''">
+				AND  responce_code  = #{responceCode}
+			</if>
+			<if test="status != null and status != ''">
+				AND  status  = #{status}
+			</if>
+			<if test="userAccount != null and userAccount != ''">
+				AND  user_account  = #{userAccount}
+			</if>
+		</where>
+	</select>
+
+	<!-- 获取项目列表 -->
+	<select id="getProjectList" parameterType="springboot.hello.hellospringboot.entity.Testresult"  resultType="java.lang.String">
+		SELECT
+		DISTINCT project
+		FROM t_testresult
+		<where>
+			project is not null
+			<if test="userAccount != null and userAccount != ''">
+				AND  user_account  = #{userAccount}
 			</if>
 		</where>
 	</select>

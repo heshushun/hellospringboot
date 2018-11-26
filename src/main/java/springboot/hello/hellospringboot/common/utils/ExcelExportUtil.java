@@ -3,6 +3,7 @@ package springboot.hello.hellospringboot.common.utils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.xssf.usermodel.*;
 import org.junit.Assert;
 import springboot.hello.hellospringboot.common.annotation.ExceVo;
 import springboot.hello.hellospringboot.common.exception.RRException;
@@ -134,9 +135,8 @@ public class ExcelExportUtil<T> {
      * @param objs 导出实体集合
      * @param rowIndex excel第几行开始导出
      */
-    public void exportAsAop2(String fileName,String templet, List<T> objs, int rowIndex,Integer[] testresultCount) {
+    public HSSFWorkbook exportAsAop2(String fileName, String templet, List<T> objs, int rowIndex, Integer[] testresultCount) {
         POIFSFileSystem fs = null;
-        FileOutputStream os = null;
         try {
             // classpath 下的模板excel文件
             fs = new POIFSFileSystem(Thread.currentThread().getContextClassLoader().getResourceAsStream(templet));
@@ -148,10 +148,11 @@ public class ExcelExportUtil<T> {
             List<Field> fieldList = getFieldList();
 
             HSSFWorkbook workbook = new HSSFWorkbook(fs);
+            //XSSFWorkbook workbook = new XSSFWorkbook();
             HSSFCellStyle style = setCellStyle(workbook);
             HSSFSheet sheet = workbook.getSheetAt(0);
-
             HSSFRow row_count = sheet.getRow(2);
+
             for (int k = 0;  k<=2; k++){
                 HSSFCell cell_count = row_count.getCell((k*2)+1);
                 cell_count.setCellStyle(style);
@@ -170,19 +171,9 @@ public class ExcelExportUtil<T> {
                 }
             }
 
-            os = new FileOutputStream(new File("D:\\"+fileName+".xls"));
-            //os = new FileOutputStream(new File(fileName+".xls"));
-            workbook.write(os);
+            return workbook;
         } catch (Exception e) {
             throw new RRException("导出失败",e);
-        } finally {
-            if (os != null) {
-                try {
-                    os.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
