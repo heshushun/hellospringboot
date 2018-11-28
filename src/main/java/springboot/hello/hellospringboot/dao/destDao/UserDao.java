@@ -27,4 +27,10 @@ public interface UserDao extends BaseMapper<UserEntity> {
 
     // 根据账号查用户
     public UserEntity selectByAccount(UserEntity user);
+
+    // 更新用户状态
+    public int updateStatus(UserEntity user);
+
+    // 重置密码
+    public int resetPassword(UserEntity user);
 }

@@ -82,7 +82,6 @@ public class UserController {
         page.setSize(req.getSize());
         page.setOrderByField("t_id");
         page.setAsc(false);
-
         Page<UserEntity> userPage = userService.selectUserPage(page,orikaBeanMapper.map(req,UserEntity.class));
 
         return new BaseResp(Boolean.TRUE,userPage);
@@ -97,6 +96,55 @@ public class UserController {
         userService.delUser(req.getId());
         return new BaseResp("删除成功");
     }
+
+    /**
+     * 更新用户
+     * @return
+     */
+    @RequestMapping(value = "/update" ,method = RequestMethod.POST)
+    public BaseResp<String> updateById(@RequestBody @Valid Req700017 req) {
+        userService.updateById(orikaBeanMapper.map(req,UserEntity.class));
+        return new BaseResp("更新成功");
+    }
+
+    /**
+     * 解冻/冻结
+     * @return
+     */
+    @RequestMapping(value = "/updateStatus" ,method = RequestMethod.POST)
+    public BaseResp updateStatus(@RequestBody @Valid Req700018 req) {
+
+        UserEntity userEntity = orikaBeanMapper.map(req,UserEntity.class);
+        if(req.getUserStatus().equals("1")){
+            userEntity.setUserStatus("1");
+            userEntity.setMaxError(3);
+        }else{
+            userEntity.setUserStatus("0");
+            userEntity.setMaxError(0);
+        }
+        Integer result = userService.updateStatus(userEntity);
+        if (result>0&&req.getUserStatus().equals("0")) {
+            return new BaseResp(Boolean.TRUE,"冻结成功");
+        }else if(result>0&&req.getUserStatus().equals("1")){
+            return new BaseResp(Boolean.TRUE,"解冻成功");
+        }else{
+            return new BaseResp(Boolean.FALSE,"更新状态失败");
+        }
+
+    }
+
+
+    /**
+     * 重置密码
+     * @param req
+     * @return
+     */
+    @RequestMapping(value = "/resetPassword" ,method = RequestMethod.POST)
+    public BaseResp resetPassword(@Valid  Req700002 req) {
+        userService.resetPassword(orikaBeanMapper.map(req,UserEntity.class));
+        return new BaseResp(Boolean.TRUE,"重置成功");
+    }
+
 
     /**
      * 添加用户
@@ -132,7 +180,7 @@ public class UserController {
      * 根据Id 查询用户
      * @return
      */
-    @RequestMapping(value = "/get" ,method = RequestMethod.POST)
+    @RequestMapping(value = "/get" ,method = RequestMethod.GET)
     public BaseResp<UserEntity> getUserById(@Valid Req700004 req) {
         UserEntity userEntity = userService.getUserById(req.getId());
         return new BaseResp(Boolean.TRUE,userEntity);

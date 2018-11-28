@@ -41,8 +41,8 @@ public class UserEntity implements Serializable
     private int age;
 
     @ExceVo(sort = 5)
-    @TableField("t_address")
-    private String address;
+    @TableField("t_wechat")
+    private String wechat;
 
     @ExceVo(sort = 6)
     @TableField("t_salt")
@@ -53,8 +53,18 @@ public class UserEntity implements Serializable
     private Integer maxError;
 
     @ExceVo(sort = 8)
-    @TableField("t_status")
-    private Integer status;
+    @TableField("t_user_status")
+    private String userStatus;
+
+    @TableField("t_portrait")
+    private String portrait;
+
+    @TableField("t_sex")
+    private String sex;
+
+    @TableField("t_department_id")
+    private Integer departmentId;
+
 
     public UserEntity() {
     }
@@ -99,12 +109,12 @@ public class UserEntity implements Serializable
         this.age = age;
     }
 
-    public String getAddress() {
-        return address;
+    public String getWechat() {
+        return wechat;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setWechat(String wechat) {
+        this.wechat = wechat;
     }
 
     public String getSalt() {
@@ -123,12 +133,36 @@ public class UserEntity implements Serializable
         this.maxError = maxError;
     }
 
-    public Integer getStatus() {
-        return status;
+    public String getUserStatus() {
+        return userStatus;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus;
+    }
+
+    public String getPortrait() {
+        return portrait;
+    }
+
+    public void setPortrait(String portrait) {
+        this.portrait = portrait;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public Integer getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
     }
 
     @Override
@@ -139,10 +173,13 @@ public class UserEntity implements Serializable
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
-                ", address='" + address + '\'' +
+                ", wechat='" + wechat + '\'' +
                 ", salt='" + salt + '\'' +
                 ", maxError=" + maxError +
-                ", status=" + status +
+                ", userStatus='" + userStatus + '\'' +
+                ", portrait='" + portrait + '\'' +
+                ", sex='" + sex + '\'' +
+                ", departmentId=" + departmentId +
                 '}';
     }
 }

@@ -9,10 +9,13 @@
 		<result column="t_account" property="account" />
 		<result column="t_password" property="password" />
 		<result column="t_age" property="age" />
-		<result column="t_address" property="address" />
+		<result column="t_wechat" property="wechat" />
 		<result column="t_salt" property="salt" />
 		<result column="t_maxError" property="maxError" />
-		<result column="t_status" property="status" />
+		<result column="t_user_status" property="userStatus" />
+		<result column="t_portrait" property="portrait" />
+		<result column="t_sex" property="sex" />
+		<result column="t_department_id" property="departmentId" />
 	</resultMap>
 
 	<!-- 获取用户列表list -->
@@ -34,11 +37,17 @@
 			<if test="age != null and age != ''">
 				AND  t_age  = #{age}
 			</if>
-			<if test="status != null and status != ''">
-				AND  t_status  = #{status}
+			<if test="userStatus != null and userStatus != ''">
+				AND  t_user_status  = #{userStatus}
 			</if>
-			<if test="address != null and address != ''">
-				AND  t_address  like CONCAT('%',#{address},'%')
+			<if test="wechat != null and wechat != ''">
+				AND  t_wechat  like CONCAT('%',#{wechat},'%')
+			</if>
+			<if test="departmentId != null">
+				AND  t_department_id  = #{departmentId}
+			</if>
+			<if test="sex != null and sex != ''">
+				AND  t_sex  = #{sex}
 			</if>
 		</where>
 	</select>
@@ -46,17 +55,19 @@
 
 	<insert id="batchSave" parameterType="java.util.List">
 		insert into t_users(
-		t_name, t_age, t_address, t_account, t_password, t_salt, t_maxError, t_status
+		t_name, t_age,t_sex, t_wechat, t_account, t_password, t_salt, t_maxError, t_user_status, t_department_id
 		) values
 		<foreach collection="list" item="item" index="index" separator="," open="" close="">
 			(
 			#{item.name,jdbcType=VARCHAR},
 			#{item.age,jdbcType=VARCHAR},
-			#{item.address,jdbcType=VARCHAR},
+			'男',
+			#{item.wechat,jdbcType=VARCHAR},
 			#{item.account,jdbcType=VARCHAR},
 			#{item.password,jdbcType=VARCHAR},
 			'hellospringboot',
 			3,
+			1,
 			1
 			)
 		</foreach>
@@ -73,5 +84,27 @@
 		limit 1
 	</select>
 
+	<update id="updateStatus" parameterType="springboot.hello.hellospringboot.entity.UserEntity" >
+		update t_users
+		<set>
+			<if test="userStatus != null and userStatus != ''">
+				 t_user_status  = #{userStatus},
+			</if>
+			<if test="maxError != null">
+				t_maxError  = #{maxError}
+			</if>
+		</set>
+		where t_id=#{id}
+	</update>
+
+	<update id="resetPassword" parameterType="springboot.hello.hellospringboot.entity.UserEntity" >
+		update t_users
+		<set>
+			<if test="password != null and password != ''">
+				t_password  = #{password},
+			</if>
+		</set>
+		where t_id=#{id}
+	</update>
 
 </mapper>

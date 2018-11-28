@@ -57,8 +57,8 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
             throw new BizException(ErrorBuilder.buildBizError("400", "你好，该账户不存在"));
         }
         //2、 先看用户是否可用
-        Integer status = user1.getStatus();
-        if (status == 0) {
+        String status = user1.getUserStatus();
+        if (status.equals("0")) {
             throw new BizException(ErrorBuilder.buildBizError("400", "账户已被冻结,请联系管理员处理！"));
         }
         //3、验证密码是否正确
@@ -70,7 +70,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
                     user1.setMaxError(maxError);
                 } else {
                     user1.setMaxError(maxError);
-                    user1.setStatus(0);//冻结用户
+                    user1.setUserStatus("0");//冻结用户
                 }
                 userDao.updateById(user1);
                 throw new BizException(ErrorBuilder.buildBizError("400", "账号密码错误,还剩" + maxError + "次机会"));
@@ -89,14 +89,12 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
         return jwt;
     }
 
-
-
     /**
      * 获取用户列表
      * @return
      */
     @Override
-    @Cacheable(value="users" , key="#root.methodName")
+    //@Cacheable(value="users" , key="#root.methodName")
     public List<UserEntity> list() {
         return this.baseMapper.list();
     }
@@ -108,7 +106,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
      * @param id
      */
     @Override
-    @CacheEvict(value="users",allEntries=true)
+    //@CacheEvict(value="users",allEntries=true)
     public void delUser(Integer id) {
         this.baseMapper.deleteById(id);
         System.out.println("user删除");
@@ -119,13 +117,15 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
      * @param user
      */
     @Override
-    @CacheEvict(value="users",allEntries=true)
+    //@CacheEvict(value="users",allEntries=true)
     public void addUser(UserEntity user) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String password =  user.getPassword();
         //String salt = user.getSalt();
         MD5Hash hash = new MD5Hash(password,"hellospringboot",2);
         user.setPassword(hash.toString());
         user.setSalt("hellospringboot");
+        user.setMaxError(3);
+        user.setUserStatus("1");
         this.baseMapper.insert(user);
         System.out.println("添加user");
     }
@@ -135,7 +135,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
      * @param userList
      */
     @Override
-    @CacheEvict(value="users",allEntries=true)
+    //@CacheEvict(value="users",allEntries=true)
     public void saveUserList(List<UserEntity> userList){
         this.baseMapper.batchSave(userList);
         System.out.println("批量添加user");
@@ -158,9 +158,39 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
      * @return
      */
     @Override
-    @Cacheable(value="users" , key="#root.methodName")
+    //@Cacheable(value="users" , key="#root.methodName")
     public Page<UserEntity> selectUserPage(Page<UserEntity> page, UserEntity userEntity) {
         return page.setRecords(this.baseMapper.selectUserList(page,userEntity));
+    }
+
+    /**
+     * 更新用户状态
+     * @param user
+     * @return
+     */
+    @Override
+    public int updateStatus(UserEntity user) {
+        return this.baseMapper.updateStatus(user);
+    }
+
+    /**
+     * 重置密码
+     * @param user
+     * @return
+     */
+    @Override
+    public int resetPassword(UserEntity user) {
+        String password =  "123123";
+        MD5Hash hash = null;
+        try {
+            hash = new MD5Hash(password,"hellospringboot",2);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        user.setPassword(hash.toString());
+        return this.baseMapper.resetPassword(user);
     }
 
 }

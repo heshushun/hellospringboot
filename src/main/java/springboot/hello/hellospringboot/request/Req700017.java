@@ -1,17 +1,15 @@
 package springboot.hello.hellospringboot.request;
 
-
-import com.baomidou.mybatisplus.annotations.TableField;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-/**
- * 添加 用户 的入参
- */
-public class Req700003 implements Serializable {
+public class Req700017 implements Serializable {
     private static final long serialVersionUID = -7323868806548711092L;
+
+    @NotNull(message = "ID不能为空")
+    private Integer id;
 
     @NotBlank(message = "名称不能为空")
     private String name;
@@ -26,9 +24,9 @@ public class Req700003 implements Serializable {
     @NotBlank(message = "密码不能为空")
     private String password;
 
-    private String salt;
-
     private String userStatus;
+
+    private String salt;
 
     private Integer maxError;
 
@@ -38,8 +36,13 @@ public class Req700003 implements Serializable {
 
     private Integer departmentId;
 
+    public Integer getId() {
+        return id;
+    }
 
-
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

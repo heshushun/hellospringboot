@@ -160,8 +160,8 @@ stock:
 shakey: LUTqZb3IkHjKcH3xjQcpqfZvWvNjQ4760KjZb3VBXmJ4Y9zwK5egrkIQK05DaCiq4vlxqAEvUzDTsl8vwlYNWJpozHxRjbSXr6gBcMxPtRbtPcLRkgwhgvD/3k054XnKFlmbQW5y716VSFkjLQnjY91c+HoAO4IiWpsYOUD+ZX4=
 
 #图片保存地址
-main-dir: /home/upload
+main-dir: D:\\software\\tomcat\\tomcat-8.5.34-x64\\webapps
 
 #图片访问地址
-visit-url: http://47.98.204.145/img/
+visit-url: http://127.0.0.1:8081/
 

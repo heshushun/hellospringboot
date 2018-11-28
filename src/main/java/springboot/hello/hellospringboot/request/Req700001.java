@@ -20,16 +20,20 @@ public class Req700001 extends Page<UserEntity> implements Serializable {
 
     private int age;
 
-    private String address;
+    private String wechat;
 
     private String account;
 
 
     private String salt;
 
-    private Integer status;
+    private String userStatus;
 
     private Integer maxError;
+
+    private String sex;
+
+    private Integer departmentId;
 
     public String getName() {
         return name;
@@ -47,12 +51,12 @@ public class Req700001 extends Page<UserEntity> implements Serializable {
         this.age = age;
     }
 
-    public String getAddress() {
-        return address;
+    public String getWechat() {
+        return wechat;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setWechat(String wechat) {
+        this.wechat = wechat;
     }
 
     public String getAccount() {
@@ -79,11 +83,27 @@ public class Req700001 extends Page<UserEntity> implements Serializable {
         this.maxError = maxError;
     }
 
-    public Integer getStatus() {
-        return status;
+    public String getUserStatus() {
+        return userStatus;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public Integer getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
     }
 }

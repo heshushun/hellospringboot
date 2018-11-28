@@ -33,4 +33,8 @@ public  interface UserService extends IService<UserEntity> {
 
     public Page<UserEntity> selectUserPage(Page<UserEntity> page, UserEntity userEntity);
 
+    public int updateStatus(UserEntity user);
+
+    public int resetPassword(UserEntity user);
+
 }
