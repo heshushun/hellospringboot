@@ -75,6 +75,9 @@
 		</where>
 	</select>
 
+	<delete id="cleanTestresult"  >
+		delete from t_testresult WHERE DATE_SUB(CURDATE(),INTERVAL 1 DAY) &gt; date(create_time)
+	</delete>
 
 
 </mapper>

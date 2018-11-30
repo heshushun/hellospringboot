@@ -33,4 +33,7 @@ public interface UserDao extends BaseMapper<UserEntity> {
 
     // 重置密码
     public int resetPassword(UserEntity user);
+
+    // 修改密码
+    public int updatePass(UserEntity user);
 }

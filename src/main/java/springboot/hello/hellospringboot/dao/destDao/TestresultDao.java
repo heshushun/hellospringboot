@@ -25,4 +25,7 @@ public interface TestresultDao extends BaseMapper<Testresult> {
 
     //获取项目列表
     public List<String> getProjectList (Testresult testresult);
+
+    //清空一天前的测试结果
+    public void cleanTestresult();
 }

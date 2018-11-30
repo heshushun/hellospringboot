@@ -7,14 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import springboot.hello.hellospringboot.common.orika.OrikaBeanMapper;
+import springboot.hello.hellospringboot.common.utils.AccountUtil;
 import springboot.hello.hellospringboot.common.utils.ExcelExportUtil;
 import springboot.hello.hellospringboot.common.utils.ExcelReadUtil;
+import springboot.hello.hellospringboot.entity.Testresult;
 import springboot.hello.hellospringboot.entity.UserEntity;
 import springboot.hello.hellospringboot.request.*;
 import springboot.hello.hellospringboot.response.BaseResp;
 import springboot.hello.hellospringboot.response.Resp80001;
 import springboot.hello.hellospringboot.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
@@ -185,6 +188,47 @@ public class UserController {
         UserEntity userEntity = userService.getUserById(req.getId());
         return new BaseResp(Boolean.TRUE,userEntity);
     }
+
+    /**
+     * 根据账号 查询用户
+     * @return
+     */
+    @RequestMapping(value = "/selectByAccount" ,method = RequestMethod.GET)
+    public BaseResp<UserEntity> selectByAccount(HttpServletRequest request,String account) {
+
+        if (StringUtils.isEmpty(account)) {
+            // 获取登录后的账号
+            AccountUtil accountUtil = new AccountUtil();
+            account = accountUtil.getLoginAccount(request);
+        }
+        UserEntity userEntity = new  UserEntity();
+        userEntity.setAccount(account);
+
+        UserEntity user = userService.selectByAccount(userEntity);
+        return new BaseResp(Boolean.TRUE,user);
+    }
+
+    /**
+     * 修改密码
+     * @return
+     */
+    @RequestMapping(value = "/updatePass" ,method = RequestMethod.POST)
+    public BaseResp updatePass(HttpServletRequest request,@Valid Req700019 req) {
+
+        String account = req.getAccount();
+        if (StringUtils.isEmpty(account)) {
+            // 获取登录后的账号
+            AccountUtil accountUtil = new AccountUtil();
+            account = accountUtil.getLoginAccount(request);
+        }
+        UserEntity userEntity = new  UserEntity();
+        userEntity.setAccount(account);
+        userEntity.setPassword(req.getPassword());
+
+        userService.updatePass(userEntity);
+        return new BaseResp(Boolean.TRUE,"修改密码成功");
+    }
+
 
     /**
      * 获取用户信息

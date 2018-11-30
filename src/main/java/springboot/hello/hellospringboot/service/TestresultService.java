@@ -28,4 +28,7 @@ public interface TestresultService extends IService<Testresult> {
 
     //根据ID获取单条测试结果
     public Testresult getTestresultById(Integer testresultId);
+
+    //清空一天前的测试结果
+    public void cleanTestresult();
 }

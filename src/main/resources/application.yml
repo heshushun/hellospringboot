@@ -161,7 +161,9 @@ shakey: LUTqZb3IkHjKcH3xjQcpqfZvWvNjQ4760KjZb3VBXmJ4Y9zwK5egrkIQK05DaCiq4vlxqAEv
 
 #图片保存地址
 main-dir: D:\\software\\tomcat\\tomcat-8.5.34-x64\\webapps
+#main-dir: /disk4/hellospringboot-view/tomcat-hellospringboot-view/webapps
 
 #图片访问地址
 visit-url: http://127.0.0.1:8081/
+#visit-url: http://10.20.65.161:9528/
 

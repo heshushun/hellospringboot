@@ -37,4 +37,9 @@ public  interface UserService extends IService<UserEntity> {
 
     public int resetPassword(UserEntity user);
 
+    // 根据账号查用户
+    public UserEntity selectByAccount(UserEntity user);
+
+    public int updatePass(UserEntity user);
+
 }

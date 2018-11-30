@@ -193,4 +193,34 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
         return this.baseMapper.resetPassword(user);
     }
 
+    /**
+     * 根据账号获取用户
+     * @param user
+     * @return
+     */
+    @Override
+    public UserEntity selectByAccount(UserEntity user) {
+        return this.baseMapper.selectByAccount(user);
+    }
+
+    /**
+     * 修改密码
+     * @param user
+     * @return
+     */
+    @Override
+    public int updatePass(UserEntity user) {
+        String password =  user.getPassword();
+        MD5Hash hash = null;
+        try {
+            hash = new MD5Hash(password,"hellospringboot",2);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        user.setPassword(hash.toString());
+        return this.baseMapper.updatePass(user);
+    }
+
 }

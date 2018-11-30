@@ -61,4 +61,12 @@ public class TestresultServiceImpl extends ServiceImpl<TestresultDao, Testresult
     public Testresult getTestresultById(Integer testresultId) {
         return this.baseMapper.selectById(testresultId);
     }
+
+    /**
+     * 清空一天前的测试结果
+     */
+    @Override
+    public void cleanTestresult() {
+        this.baseMapper.cleanTestresult();
+    }
 }

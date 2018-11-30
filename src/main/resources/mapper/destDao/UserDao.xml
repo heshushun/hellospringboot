@@ -107,4 +107,14 @@
 		where t_id=#{id}
 	</update>
 
+	<update id="updatePass" parameterType="springboot.hello.hellospringboot.entity.UserEntity" >
+		update t_users
+		<set>
+			<if test="password != null and password != ''">
+				t_password  = #{password},
+			</if>
+		</set>
+		where t_account=#{account}
+	</update>
+
 </mapper>
