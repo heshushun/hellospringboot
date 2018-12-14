@@ -72,6 +72,23 @@ public class UserController {
     }
 
     /**
+     * 查询好友列表
+     *
+     * @return
+     */
+    @RequestMapping(value = "/friend", method = RequestMethod.GET)
+    public List<UserEntity> friend(HttpServletRequest req) {
+
+        // 获取登录后的账号
+        AccountUtil accountUtil = new AccountUtil();
+        String account = accountUtil.getLoginAccount(req);
+        UserEntity userEntity = new  UserEntity();
+        userEntity.setAccount(account);
+
+        return userService.friend(userEntity);
+    }
+
+    /**
      * 用户列表（分页）
      *
      * @return

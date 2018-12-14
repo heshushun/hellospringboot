@@ -36,4 +36,7 @@ public interface UserDao extends BaseMapper<UserEntity> {
 
     // 修改密码
     public int updatePass(UserEntity user);
+
+    // 查询好友
+    public List<UserEntity> friend(UserEntity user);
 }

@@ -42,4 +42,6 @@ public  interface UserService extends IService<UserEntity> {
 
     public int updatePass(UserEntity user);
 
+    public List<UserEntity> friend(UserEntity user);
+
 }

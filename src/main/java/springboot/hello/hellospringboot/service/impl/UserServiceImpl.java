@@ -223,4 +223,14 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
         return this.baseMapper.updatePass(user);
     }
 
+    /**
+     * 查询好友
+     * @param user
+     * @return
+     */
+    @Override
+    public List<UserEntity> friend(UserEntity user) {
+        return this.baseMapper.friend(user);
+    }
+
 }

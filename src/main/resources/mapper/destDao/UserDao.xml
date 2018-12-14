@@ -23,6 +23,15 @@
 		SELECT * FROM t_users
 	</select>
 
+	<!-- 获取好友列表list -->
+	<select id="friend"  resultMap="BaseResultMap">
+		SELECT * FROM t_users
+		<where>
+			<if test="account != null and account != ''">
+				AND  t_account  != #{account}
+			</if>
+		</where>
+	</select>
 
 	<!-- 分页查询 -->
 	<select id="selectUserList"  parameterType="springboot.hello.hellospringboot.entity.UserEntity" resultMap="BaseResultMap">
