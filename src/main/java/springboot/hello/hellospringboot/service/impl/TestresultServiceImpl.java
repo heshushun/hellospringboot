@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import springboot.hello.hellospringboot.entity.Testresult;
 import springboot.hello.hellospringboot.dao.destDao.TestresultDao;
 import springboot.hello.hellospringboot.request.Req700015;
+import springboot.hello.hellospringboot.request.Req700022;
 import springboot.hello.hellospringboot.service.TestresultService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -78,5 +79,13 @@ public class TestresultServiceImpl extends ServiceImpl<TestresultDao, Testresult
     @Override
     public void cleanTestresult() {
         this.baseMapper.cleanTestresult();
+    }
+
+    /**
+     * 根据条件删除测试结果
+     */
+    @Override
+    public Integer delTestresult(Req700022 req700022) {
+        return this.baseMapper.delTestresult(req700022);
     }
 }

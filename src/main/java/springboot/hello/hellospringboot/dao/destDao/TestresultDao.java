@@ -5,6 +5,7 @@ import springboot.hello.hellospringboot.entity.Company;
 import springboot.hello.hellospringboot.entity.Testresult;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import springboot.hello.hellospringboot.request.Req700015;
+import springboot.hello.hellospringboot.request.Req700022;
 
 import java.util.List;
 
@@ -31,4 +32,7 @@ public interface TestresultDao extends BaseMapper<Testresult> {
 
     //获取TS列表
     public List<String> getTsList (Testresult testresult);
+
+    //根据条件删除测试结果
+    public Integer delTestresult(Req700022 req700022);
 }

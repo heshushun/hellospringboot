@@ -22,6 +22,7 @@ import springboot.hello.hellospringboot.entity.Testresult;
 import springboot.hello.hellospringboot.request.Req700015;
 import springboot.hello.hellospringboot.request.Req700016;
 import springboot.hello.hellospringboot.request.Req700020;
+import springboot.hello.hellospringboot.request.Req700022;
 import springboot.hello.hellospringboot.response.BaseResp;
 import springboot.hello.hellospringboot.service.TestresultService;
 
@@ -272,5 +273,20 @@ public class TestresultController {
        return new BaseResp<>(Boolean.TRUE,"导出测试结果成功");
     }
 
+
+    /**
+     * 清空测试结果
+     *
+     * @return
+     */
+    @RequestMapping(value = "/delTestresult", method = RequestMethod.POST)
+    public BaseResp delTestresult(HttpServletRequest request,@RequestBody Req700022 req){
+        // 获取登录后的账号
+        AccountUtil accountUtil = new AccountUtil();
+        String userAccount = accountUtil.getLoginAccount(request);
+        req.setUserAccount(userAccount);
+        testresultService.delTestresult(req);
+        return new BaseResp(Boolean.TRUE,"删除 成功");
+    }
 	
 }

@@ -5,6 +5,7 @@ import springboot.hello.hellospringboot.entity.Company;
 import springboot.hello.hellospringboot.entity.Testresult;
 import com.baomidou.mybatisplus.service.IService;
 import springboot.hello.hellospringboot.request.Req700015;
+import springboot.hello.hellospringboot.request.Req700022;
 
 import java.util.List;
 
@@ -34,4 +35,9 @@ public interface TestresultService extends IService<Testresult> {
 
     //清空一天前的测试结果
     public void cleanTestresult();
+
+    //根据条件删除测试结果
+    public Integer delTestresult(Req700022 req700022);
+
+
 }

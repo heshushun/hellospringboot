@@ -75,6 +75,7 @@
 		</where>
 	</select>
 
+
 	<!-- 获取TS列表 -->
 	<select id="getTsList" parameterType="springboot.hello.hellospringboot.entity.Testresult"  resultType="java.lang.String">
 		SELECT
@@ -89,8 +90,31 @@
 		ORDER BY group1 DESC
 	</select>
 
+
 	<delete id="cleanTestresult"  >
 		delete from t_testresult WHERE DATE_SUB(CURDATE(),INTERVAL 1 DAY) &gt; date(create_time)
+	</delete>
+
+
+	<delete id="delTestresult" parameterType="springboot.hello.hellospringboot.request.Req700022"  >
+		delete from t_testresult
+		<where>
+			<if test="project != null and project != ''">
+				AND  project  like CONCAT('%',#{project},'%')
+			</if>
+			<if test="group1 != null and group1 != ''">
+				AND  group1  = #{group1}
+			</if>
+			<if test="responceCode != null and responceCode != ''">
+				AND  responce_code  = #{responceCode}
+			</if>
+			<if test="status != null and status != ''">
+				AND  status  = #{status}
+			</if>
+			<if test="userAccount != null and userAccount != ''">
+				AND  user_account  = #{userAccount}
+			</if>
+		</where>
 	</delete>
 
 
