@@ -165,5 +165,5 @@ main-dir: D:\\software\\tomcat\\tomcat-8.5.34-x64\\webapps
 
 #图片访问地址
 visit-url: http://127.0.0.1:8081/
-#visit-url: http://10.20.65.161:9528/
+#visit-url: http://10.20.65.161:9527/
 

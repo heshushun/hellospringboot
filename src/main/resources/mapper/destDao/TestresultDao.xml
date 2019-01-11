@@ -75,6 +75,20 @@
 		</where>
 	</select>
 
+	<!-- 获取TS列表 -->
+	<select id="getTsList" parameterType="springboot.hello.hellospringboot.entity.Testresult"  resultType="java.lang.String">
+		SELECT
+		DISTINCT group1
+		FROM t_testresult
+		<where>
+			group1 is not null
+			<if test="userAccount != null and userAccount != ''">
+				AND  user_account  = #{userAccount}
+			</if>
+		</where>
+		ORDER BY group1 DESC
+	</select>
+
 	<delete id="cleanTestresult"  >
 		delete from t_testresult WHERE DATE_SUB(CURDATE(),INTERVAL 1 DAY) &gt; date(create_time)
 	</delete>

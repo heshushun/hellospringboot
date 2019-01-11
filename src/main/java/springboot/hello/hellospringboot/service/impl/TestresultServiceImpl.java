@@ -53,6 +53,16 @@ public class TestresultServiceImpl extends ServiceImpl<TestresultDao, Testresult
     }
 
     /**
+     * 获取 时间戳 列表
+     * @param testresult
+     * @return
+     */
+    @Override
+    public List<String> getTsList(Testresult testresult) {
+        return this.baseMapper.getTsList(testresult);
+    }
+
+    /**
      * 根据ID获取单条测试结果
      * @param testresultId
      * @return

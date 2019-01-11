@@ -14,20 +14,24 @@ import org.springframework.web.bind.annotation.*;
 
 import springboot.hello.hellospringboot.common.orika.OrikaBeanMapper;
 import springboot.hello.hellospringboot.common.utils.AccountUtil;
+import springboot.hello.hellospringboot.common.utils.DateUtil;
 import springboot.hello.hellospringboot.common.utils.ExcelExportUtil;
 import springboot.hello.hellospringboot.common.utils.ExcelUtil;
 import springboot.hello.hellospringboot.entity.Task;
 import springboot.hello.hellospringboot.entity.Testresult;
 import springboot.hello.hellospringboot.request.Req700015;
 import springboot.hello.hellospringboot.request.Req700016;
+import springboot.hello.hellospringboot.request.Req700020;
 import springboot.hello.hellospringboot.response.BaseResp;
 import springboot.hello.hellospringboot.service.TestresultService;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.*;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -56,8 +60,9 @@ public class TestresultController {
      */
     @RequestMapping(value = "/getTs", method = RequestMethod.GET)
     public BaseResp get(){
-        long ts = System.currentTimeMillis();
-        return new BaseResp(Boolean.TRUE,Long.toString(ts));
+        //long ts = System.currentTimeMillis();
+        String ts = DateUtil.format(new Date(),"yyyyMMddHHmmss");
+        return new BaseResp(Boolean.TRUE,ts);
     }
 
     /**
@@ -104,6 +109,76 @@ public class TestresultController {
         }
         return new BaseResp(Boolean.TRUE,projectList);
     }
+
+    /**
+     * 时间戳列表
+     *
+     * @return
+     */
+    @RequestMapping(value = "/getTsList", method = RequestMethod.GET)
+    public BaseResp getTsList(HttpServletRequest request){
+        // 获取登录后的账号
+        AccountUtil accountUtil = new AccountUtil();
+        String userAccount = accountUtil.getLoginAccount(request);
+        Testresult testresult = new  Testresult();
+        testresult.setUserAccount(userAccount);
+
+        List<String> TsList = testresultService.getTsList(testresult);
+        if(TsList.size()==0){
+            return new BaseResp(Boolean.FALSE,TsList);
+        }
+        return new BaseResp(Boolean.TRUE,TsList);
+    }
+
+    /**
+     * 插入 测试结果记录
+     * @param req
+     * @return
+     */
+    @RequestMapping(value = "/insertTestResult",method = RequestMethod.POST)
+    public BaseResp insertTestResult(@Valid Req700020 req){
+
+        Boolean result = false;
+        Testresult testresult = new Testresult();
+        testresult.setUserAccount(req.getUserAccount());
+        testresult.setCreateTime(DateUtil.format(new Date(),"yyyy-MM-dd HH:mm:ss"));
+        testresult.setExpectResult(req.getExpectResult());
+        testresult.setFunctionId(req.getFunctionId());
+        testresult.setGroup1(req.getGroup1());
+        testresult.setProject(req.getProject());
+        testresult.setRequestMsg(req.getRequestMsg());
+        testresult.setResponceCode(req.getResponceCode());
+        testresult.setResponceResult(req.getResponceResult());
+
+        if(req.getCompareType()== 1){
+            if(req.getResponceResult().indexOf(req.getExpectResult())!=-1){
+                testresult.setStatus("pass");
+                result = true;
+            }else{
+                testresult.setStatus("fail");
+                result = false;
+            }
+            testresultService.insert(testresult);
+        } else if (req.getCompareType()== 2){
+            if(req.getResponceResult().equals(req.getResponceResult())){
+                testresult.setStatus("pass");
+                result = true;
+            }else{
+                testresult.setStatus("fail");
+                result = false;
+            }
+            testresultService.insert(testresult);
+        } else {
+            return new BaseResp(Boolean.FALSE,"入参错误，比对类型只能为 1:包含、2:等于");
+        }
+
+       if(!result){
+           return new BaseResp(result,"断言失败");
+       }
+        return new BaseResp(result,"断言成功");
+    }
+
+
 
     /**
      * 测试结果列表

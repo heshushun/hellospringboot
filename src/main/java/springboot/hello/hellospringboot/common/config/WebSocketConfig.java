@@ -44,7 +44,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
                     return new MyPrincipal(account);
                 }
             }
-        }).withSockJS();
+        }).setAllowedOrigins("*").withSockJS();
     }
 
     @Override

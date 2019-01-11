@@ -26,6 +26,9 @@ public interface TestresultService extends IService<Testresult> {
     //获取项目列表
     public List<String> getProjectList (Testresult testresult);
 
+    //获取TS列表
+    public List<String> getTsList (Testresult testresult);
+
     //根据ID获取单条测试结果
     public Testresult getTestresultById(Integer testresultId);
 
