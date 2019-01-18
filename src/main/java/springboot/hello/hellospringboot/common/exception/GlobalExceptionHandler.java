@@ -29,9 +29,9 @@ import java.util.List;
 import java.util.Map;
 
 
-/*@ControllerAdvice
+@ControllerAdvice
 @EnableConfigurationProperties(ExceptionProperties.class)
-@ConfigurationProperties(prefix = "system")*/
+@ConfigurationProperties(prefix = "system")
 public class GlobalExceptionHandler {
 
     @Autowired

@@ -99,7 +99,11 @@ public class AccessTokenInterceptor implements HandlerInterceptor {
         list.add("/testresult/exportTestResult");
         list.add("/testresult/insertTestResult");
         list.add("/testresult/delTestresult");
-        list.add("/compara/quotation/dayK");
+        list.add("/compara/quotation/KLine");
+        list.add("/compara/quotation/trend");
+        list.add("/compara/quotation/shau");
+        list.add("/compara/quotation/lastday");
+        list.add("/compara/quotation/real");
         Long count = list.stream().filter(u -> matcher.match(u, uri)).count();
         return count > 0 ? Boolean.TRUE : Boolean.FALSE;
     }
